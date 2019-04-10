@@ -1,4 +1,4 @@
-class _Node {
+class _LinkedListNode {
   constructor(value, next) {
     this.value = value;
     this.next = next;
@@ -11,25 +11,25 @@ export default class LinkedList {
   }
 
   insertFirst(item) {
-    this.head = new _Node(item, this.head);
+    this.head = new _LinkedListNode(item, this.head);
   }
 
   insertLast(item) {
-    if(this.head === null) {
+    if(! this.head) {
       this.insertFirst(item);
     } else {
       let tempNode = this.head;
 
-      while(tempNode.next !== null) {
+      while(tempNode.next) {
         tempNode = tempNode.next;
       }
 
-      tempNode.next = new _Node(item, null);
+      tempNode.next = new _LinkedListNode(item, null);
     }
   }
 
   insertBefore(item, key) {
-    let newNode = new _Node(item, null);
+    let newNode = new _LinkedListNode(item, null);
     let prevNode = this.head;
     let currNode = this.head;
 
@@ -51,7 +51,7 @@ export default class LinkedList {
   }
 
   insertAfter(item, key) {
-    let newNode = new _Node(item, null);
+    let newNode = new _LinkedListNode(item, null);
     let prevNode = this.head;
     let currNode = this.head;
 
@@ -73,7 +73,7 @@ export default class LinkedList {
   }
 
   insertAt(item, pos) {
-    let newNode = new _Node(item, null);
+    let newNode = new _LinkedListNode(item, null);
     let prevNode = this.head;
     let currNode = this.head;
     let currNodePos = 0;

@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import LinkedList from '../structures/LinkedList.js';
+import LinkedList from '../modules/LinkedList.js';
 
 export default class LinkedListPage extends Component {
   constructor(props) {
     super(props);
 
-    const dsSLL1 = new LinkedList('test');
+    const dsSLL1 = new LinkedList();
+    dsSLL1.insertLast('test');
 
     this.state = {
       ds: [dsSLL1],
