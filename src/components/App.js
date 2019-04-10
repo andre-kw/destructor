@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { Switch, Route } from 'react-router-dom';
 import AppContext from './AppContext';
+import LinkedListPage from '../routes/LinkedListPage';
 import './App.css';
 
 class App extends Component {
@@ -11,17 +13,10 @@ class App extends Component {
         <h1>destructor</h1>
       </header>
 
-      <main>
-        <section className="ds-select">
-          <h2>linked list</h2>
-        </section>
-
-        <section className="ds-controls">
-        </section>
-
-        <section className="ds-render">
-        </section>
-      </main>
+      <Switch>
+        <Route path="/" component={LinkedListPage} />
+        <Route exact path="/linked-lists" component={LinkedListPage} />
+      </Switch>
     </>;
   }
 }
