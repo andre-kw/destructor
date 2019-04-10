@@ -1,5 +1,16 @@
 import React, {Component} from 'react';
 import LinkedList from '../modules/LinkedList.js';
+import './LinkedListPage.css';
+
+function LinkedListItem(props) {
+  let className = 'render-ll-item ';
+  let text = (props.node) ? props.node.value : 'null';
+  className += (! props.node) ? 'render-null' : '';
+
+  return (
+    <div className={className}>{text}</div>
+  );
+}
 
 export default class LinkedListPage extends Component {
   constructor(props) {
@@ -11,19 +22,32 @@ export default class LinkedListPage extends Component {
 
     this.state = {
       ds: [dsSLL1],
+      console: ['/* linked list created. */'],
     };
   }
 
   renderLinkedList() {
     let jsx = [];
-    let tempNode = this.state.ds[0].head;
+    let n = this.state.ds[0].head;
 
-    if(! tempNode) return null;
+    if(! n) return null;
 
-    while(tempNode) {
-      jsx.push(<p key={tempNode.value}>{tempNode.value}</p>);
-      tempNode = tempNode.next;
+    while(n) {
+      jsx.push(<LinkedListItem key={n.value} node={n} />);
+      n = n.next;
     } 
+
+    jsx.push(<LinkedListItem key='null-item' />);
+
+    return jsx;
+  }
+
+  renderConsole() {
+    let jsx = [];
+
+    this.state.console.forEach(line => {
+      jsx.push(<p>{line}</p>);
+    });
 
     return jsx;
   }
@@ -33,14 +57,19 @@ export default class LinkedListPage extends Component {
     return (
       <main>
         <section className="ds-select">
-          <h2>linked list</h2>
+          <h2>linked lists</h2>
         </section>
 
         <section className="ds-controls">
         </section>
 
         <section className="ds-render">
-          {this.renderLinkedList()}
+          <div className="ds-diagram">
+            {this.renderLinkedList()}
+          </div>
+          <div className="ds-console">
+            <code>{this.renderConsole()}</code>
+          </div>
         </section>
       </main>
     );

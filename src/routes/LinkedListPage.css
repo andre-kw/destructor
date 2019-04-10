@@ -1,0 +1,39 @@
+.ds-render {
+  width: 100%;
+  justify-content: center;
+}
+
+.ds-diagram {
+  display: flex;
+  flex: 4;
+}
+
+.ds-console {
+  flex: 3;
+}
+
+.render-ll-item {
+  margin: 1em;
+  padding: 1em;
+  max-width: 5em;
+  position: relative;
+  background-color: red;
+}
+
+.render-ll-item:after {
+  display: block;
+  position: absolute;
+  content: "\21D2";
+  bottom: 6px;
+  left: 95%;
+  font-size: 2em;
+  color: red;
+}
+
+.render-ll-item.render-null {
+  background-color: gray;
+}
+
+.render-ll-item.render-null:after {
+  display: none;
+}
