@@ -1,23 +1,11 @@
-.ds-render {
-  width: 100%;
-  justify-content: center;
-}
-
-.ds-diagram {
-  display: flex;
-  flex: 4;
-}
-
-.ds-console {
-  flex: 3;
-}
-
 .render-ll-item {
   margin: 1em;
   padding: 1em;
   max-width: 5em;
   position: relative;
-  background-color: red;
+  background-color: #1c4b82;
+  color: #fff;
+  cursor: pointer;
 }
 
 .render-ll-item:after {
@@ -27,10 +15,11 @@
   bottom: 6px;
   left: 95%;
   font-size: 2em;
-  color: red;
+  color: #1c4b82;
 }
 
 .render-ll-item.render-null {
+  color: lightgray;
   background-color: gray;
 }
 

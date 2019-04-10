@@ -8,7 +8,7 @@ function LinkedListItem(props) {
   className += (! props.node) ? 'render-null' : '';
 
   return (
-    <div className={className}>{text}</div>
+    <div className={className} onClick={() => props.showDetails(props.node)}>{text}</div>
   );
 }
 
@@ -22,8 +22,38 @@ export default class LinkedListPage extends Component {
 
     this.state = {
       ds: [dsSLL1],
-      console: ['/* linked list created. */'],
+      console: [
+        {text:'/* linked list created. */', type:'comment'},
+        {text:'let linkedList = new LinkedList();', type:'input'},
+        {text:'[LinkedList]', type:'output'},
+      ],
+      inputValue: '',
     };
+
+    this.addNode = this.addNode.bind(this);
+    this.showDetails = this.showDetails.bind(this);
+  }
+
+  setVar(e) {
+    if(e.target.name === 'value') {
+      this.setState({inputValue: e.target.value});
+    }
+  }
+
+  addNode(e) {
+    e.preventDefault();
+
+    this.state.ds[0].insertLast(this.state.inputValue);
+    // TODO: give more detailed output
+    this.state.console.push({text:`linkedList.insertLast('${this.state.inputValue}')`, type:'input'});
+    this.setState({ds: this.state.ds}); // re-render
+  }
+
+  showDetails(node) {
+    // TODO: make this more readable by only printing relevant info
+    // TODO: consider making console lines clickable to highlight nodes
+    this.state.console.push({text:`node: ${JSON.stringify(node)}`, type:'output'});
+    this.setState({inputValue: ''});
   }
 
   renderLinkedList() {
@@ -33,11 +63,11 @@ export default class LinkedListPage extends Component {
     if(! n) return null;
 
     while(n) {
-      jsx.push(<LinkedListItem key={n.value} node={n} />);
+      jsx.push(<LinkedListItem showDetails={this.showDetails} key={Math.random()} node={n} />);
       n = n.next;
     } 
 
-    jsx.push(<LinkedListItem key='null-item' />);
+    jsx.push(<LinkedListItem showDetails={this.showDetails} key='null-item' />);
 
     return jsx;
   }
@@ -45,15 +75,16 @@ export default class LinkedListPage extends Component {
   renderConsole() {
     let jsx = [];
 
-    this.state.console.forEach(line => {
-      jsx.push(<p>{line}</p>);
+    this.state.console.forEach((line, index) => {
+      let className = 'line-' + line.type;
+
+      jsx.push(<p className={className} key={index}>{line.text}</p>);
     });
 
     return jsx;
   }
 
   render() {
-    console.log(this.state.ds[0]);
     return (
       <main>
         <section className="ds-select">
@@ -61,6 +92,10 @@ export default class LinkedListPage extends Component {
         </section>
 
         <section className="ds-controls">
+          <form onSubmit={(e) => this.addNode(e)}>
+            <input type="text" name="value" onKeyUp={(e) => this.setVar(e)} autoComplete="off"></input>
+            <button type="button" onClick={this.addNode}>Insert last</button>
+          </form>
         </section>
 
         <section className="ds-render">
