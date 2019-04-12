@@ -89,11 +89,14 @@ h2 {
   max-height: 33em;
   overflow-y: scroll;
   overflow-x: hidden;
+  font-size: 1.1em;
+  font-weight: bold;
 }
 
 
 .line-comment { color: #c1c1c1 }
-.line-input { color: #d3d3ff }
+.line-input { color: #fffd92; cursor: pointer }
+.line-input:hover { color: #2323aa }
 .line-output,
 .line-output-italic { color: #ffc6a9 }
 

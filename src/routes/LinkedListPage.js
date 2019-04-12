@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import LinkedList from '../modules/LinkedList.js';
 import Console from '../components/Console';
 import AppContext from '../components/AppContext';
 import './LinkedListPage.css';
@@ -25,7 +24,6 @@ export default class LinkedListPage extends Component {
   constructor(props) {
     super(props);
 
-
     this.state = {
       console: [
         {text:'/* create a linked list */', type:'comment'},
@@ -36,7 +34,6 @@ export default class LinkedListPage extends Component {
       ],
       inputValue: '',
     };
-
 
     this.addNode = this.addNode.bind(this);
     this.showDetails = this.showDetails.bind(this);
@@ -54,7 +51,8 @@ export default class LinkedListPage extends Component {
 
   addNode(e) {
     e.preventDefault();
-    e.currentTarget.value.value = '';
+
+    if(this.state.inputValue === '') return;
 
     let nodeId = this.context.ds[0].insertLast(this.state.inputValue);
     this.state.console.push({
@@ -64,10 +62,11 @@ export default class LinkedListPage extends Component {
 
     this.context.renderDiagram();
     this.context.scrollConsole();
+    this.setState({inputValue: ''});
+    document.getElementById('value').value = '';
   }
 
   showDetails(node) {
-    // TODO: consider making console lines clickable to highlight nodes
     node = node ? node : {value:'null'};
     const nextNode = node.next ? node.next.value : 'null';
 
@@ -109,7 +108,7 @@ export default class LinkedListPage extends Component {
 
           <div className="ds-controls">
             <form onSubmit={(e) => this.addNode(e)}>
-              <input type="text" name="value" onKeyUp={(e) => this.setVar(e)} autoComplete="off" placeholder=">"></input>
+              <input type="text" name="value" id="value" onKeyUp={(e) => this.setVar(e)} autoComplete="off" placeholder=">"></input>
               <div>
                 <button type="button" onClick={this.addNode}>Insert last</button>
               </div>
