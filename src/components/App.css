@@ -1,39 +1,77 @@
+html {
+  height: 100vh;
+  border-left: 2vw solid transparent;
+  border-right: 2vw solid transparent;
+  border-color: #ffcf63;
+  background-color: #f30660;
+}
+
+html:before, html:after {
+  content: "";
+  position: fixed;
+  background: #ffcf63;
+  left: 0; right: 0;
+  height: 2vw;
+}
+
+html:before { top: 0 }
+html:after { bottom: 0 }
+
 body {
   margin: 0;
 }
 
 header {
-  text-align: center;
 }
 
 h1 {
+  margin: .7em 0 0 0;
   font-size: 4em;
   font-style: italic;
+  color: #ffcf63;
 }
 
 h2 {
+  margin: 0 0 1em 0;
   font-variant: small-caps;
   font-size: 2em;
-  color: gray;
+  color: #ffcf63;
 }
 
 #root {
-  width: 45em;
+  width: 93%;
   margin: 0 auto;
 }
 
 
 .ds-select {
-  text-align: center;
 }
 
 .ds-controls {
   margin: 0 0 2em;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  flex: 3;
+}
+
+.ds-controls form {
+  padding: 2em 0;
+}
+
+.ds-controls input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  margin: 0 0 1em 0;
+  background: transparent;
+  border: 1px solid #fff;
+  color: #fff;
+  box-sizing: border-box;
 }
 
 .ds-render {
   width: 100%;
+  min-height: 30em;
+  max-height: 30em;
   display: flex;
   justify-content: center;
 }
@@ -44,16 +82,26 @@ h2 {
   flex: 4;
   flex-wrap: wrap;
   align-items: center;
+  align-content: baseline;
 }
 
 .ds-console {
-  flex: 3;
+  max-height: 33em;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 
-.line-comment { color: gray }
+.line-comment { color: #c1c1c1 }
+.line-input { color: #d3d3ff }
+.line-output,
+.line-output-italic { color: #ffc6a9 }
 
 .line-input:before {
   display: "inline";
   content: "> ";
+}
+
+.line-output-italic {
+  font-style: italic;
 }

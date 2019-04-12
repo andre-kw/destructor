@@ -1,7 +1,9 @@
 class _LinkedListNode {
-  constructor(value, next) {
+  constructor(value, next, id = 0) {
+    this.id = id;
     this.value = value;
     this.next = next;
+    this.highlighted = false;
   }
 }
 
@@ -11,10 +13,23 @@ export default class LinkedList {
   }
 
   insertFirst(item) {
-    this.head = new _LinkedListNode(item, this.head);
+    let counter = 0;
+
+    if(this.head) {
+      let currNode = this.head;
+
+      while(currNode.next !== null) {
+        counter++;
+        currNode = currNode.next;
+      }
+    }
+    
+    this.head = new _LinkedListNode(item, this.head, counter);
   }
 
   insertLast(item) {
+    let counter = 1;
+
     if(! this.head) {
       this.insertFirst(item);
     } else {
@@ -22,10 +37,13 @@ export default class LinkedList {
 
       while(tempNode.next) {
         tempNode = tempNode.next;
+        counter++;
       }
 
-      tempNode.next = new _LinkedListNode(item, null);
+      tempNode.next = new _LinkedListNode(item, null, counter);
     }
+
+    return counter;
   }
 
   insertBefore(item, key) {
@@ -151,5 +169,16 @@ export default class LinkedList {
     currNode.next = this.head;
   }
 
+  toggleHighlight(nodeId) {
+    let currNode = this.head;
+
+    while(currNode !== null) {
+      if(currNode.id === nodeId) {
+        currNode.highlighted = ! currNode.highlighted;
+        return;
+      }
+      currNode = currNode.next;
+    }
+  }
 }
 

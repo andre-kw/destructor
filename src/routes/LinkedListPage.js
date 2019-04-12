@@ -1,11 +1,18 @@
 import React, {Component} from 'react';
 import LinkedList from '../modules/LinkedList.js';
+import Console from '../components/Console';
+import AppContext from '../components/AppContext';
 import './LinkedListPage.css';
 
 function LinkedListItem(props) {
   let className = 'render-ll-item ';
   let text = (props.node) ? props.node.value : 'null';
-  className += (! props.node) ? 'render-null' : '';
+
+  if(props.node) {
+    className += (props.node.highlighted) ? 'render-highlighted' : '';
+  } else {
+    className += 'render-null';
+  }
 
   return (
     <div className={className} onClick={() => props.showDetails(props.node)}>{text}</div>
@@ -13,25 +20,30 @@ function LinkedListItem(props) {
 }
 
 export default class LinkedListPage extends Component {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
-    const dsSLL1 = new LinkedList();
-    dsSLL1.insertLast('test');
-    dsSLL1.insertLast('another test');
 
     this.state = {
-      ds: [dsSLL1],
       console: [
-        {text:'/* linked list created. */', type:'comment'},
+        {text:'/* create a linked list */', type:'comment'},
         {text:'let linkedList = new LinkedList();', type:'input'},
+        {text:'linkedList.insertLast("test");', type:'input', nodeId:0},
+        {text:'linkedList.insertLast("another test");', type:'input', nodeId:1},
         {text:'[LinkedList]', type:'output'},
       ],
       inputValue: '',
     };
 
+
     this.addNode = this.addNode.bind(this);
     this.showDetails = this.showDetails.bind(this);
+  }
+
+  componentDidMount() {
+    this.context.initLinkedList();
   }
 
   setVar(e) {
@@ -42,23 +54,34 @@ export default class LinkedListPage extends Component {
 
   addNode(e) {
     e.preventDefault();
+    e.currentTarget.value.value = '';
 
-    this.state.ds[0].insertLast(this.state.inputValue);
-    // TODO: give more detailed output
-    this.state.console.push({text:`linkedList.insertLast('${this.state.inputValue}')`, type:'input'});
-    this.setState({ds: this.state.ds}); // re-render
+    let nodeId = this.context.ds[0].insertLast(this.state.inputValue);
+    this.state.console.push({
+      nodeId,
+      text:`linkedList.insertLast('${this.state.inputValue}')`, 
+      type:'input'});
+
+    this.context.renderDiagram();
+    this.context.scrollConsole();
   }
 
   showDetails(node) {
-    // TODO: make this more readable by only printing relevant info
     // TODO: consider making console lines clickable to highlight nodes
-    this.state.console.push({text:`node: ${JSON.stringify(node)}`, type:'output'});
+    node = node ? node : {value:'null'};
+    const nextNode = node.next ? node.next.value : 'null';
+
+    this.state.console.push({text:`node: {`, type:'output-italic'});
+    this.state.console.push({text:`   value: "${node.value}"`, type:'output-italic'});
+    this.state.console.push({text:`   next: "${nextNode}"`, type:'output-italic'});
+    this.state.console.push({text:`}`, type:'output-italic'});
     this.setState({inputValue: ''});
+    this.context.scrollConsole();
   }
 
   renderLinkedList() {
     let jsx = [];
-    let n = this.state.ds[0].head;
+    let n = this.context.ds[0] ? this.context.ds[0].head : null;
 
     if(! n) return null;
 
@@ -72,18 +95,6 @@ export default class LinkedListPage extends Component {
     return jsx;
   }
 
-  renderConsole() {
-    let jsx = [];
-
-    this.state.console.forEach((line, index) => {
-      let className = 'line-' + line.type;
-
-      jsx.push(<p className={className} key={index}>{line.text}</p>);
-    });
-
-    return jsx;
-  }
-
   render() {
     return (
       <main>
@@ -91,19 +102,20 @@ export default class LinkedListPage extends Component {
           <h2>linked lists</h2>
         </section>
 
-        <section className="ds-controls">
-          <form onSubmit={(e) => this.addNode(e)}>
-            <input type="text" name="value" onKeyUp={(e) => this.setVar(e)} autoComplete="off"></input>
-            <button type="button" onClick={this.addNode}>Insert last</button>
-          </form>
-        </section>
-
         <section className="ds-render">
           <div className="ds-diagram">
             {this.renderLinkedList()}
           </div>
-          <div className="ds-console">
-            <code>{this.renderConsole()}</code>
+
+          <div className="ds-controls">
+            <form onSubmit={(e) => this.addNode(e)}>
+              <input type="text" name="value" onKeyUp={(e) => this.setVar(e)} autoComplete="off" placeholder=">"></input>
+              <div>
+                <button type="button" onClick={this.addNode}>Insert last</button>
+              </div>
+            </form>
+            
+            <Console console={this.state.console} />
           </div>
         </section>
       </main>

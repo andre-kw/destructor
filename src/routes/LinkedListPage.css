@@ -3,8 +3,8 @@
   padding: 1em;
   max-width: 5em;
   position: relative;
-  background-color: #1c4b82;
-  color: #fff;
+  background-color: #e3c4a8;
+  color: #000;
   cursor: pointer;
 }
 
@@ -15,7 +15,7 @@
   bottom: 6px;
   left: 95%;
   font-size: 2em;
-  color: #1c4b82;
+  color: #e3c4a8;
 }
 
 .render-ll-item.render-null {
@@ -25,4 +25,8 @@
 
 .render-ll-item.render-null:after {
   display: none;
+}
+
+.render-highlighted {
+  background-color: blue;
 }
