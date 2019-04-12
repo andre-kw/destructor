@@ -1,15 +1,25 @@
+@import url('https://fonts.googleapis.com/css?family=Anonymous+Pro|Cormorant+SC');
+
 html {
   height: 100vh;
   border-left: 2vw solid transparent;
   border-right: 2vw solid transparent;
-  border-color: #ffcf63;
-  background-color: #f30660;
+  /*border-color: #d4bd89;
+  background-color: #f30660;*/
+  background-color: #212121;
 }
 
 html:before, html:after {
   content: "";
   position: fixed;
-  background: #ffcf63;
+  /*background: #d4bd89;*/
+  background: repeating-linear-gradient(
+    45deg,
+    #d4bd89,
+    #d4bd89 20px,
+    #202020 20px,
+    #202020 40px
+  );
   left: 0; right: 0;
   height: 2vw;
 }
@@ -19,23 +29,45 @@ html:after { bottom: 0 }
 
 body {
   margin: 0;
+  font-family: 'anonymous pro';
 }
 
 header {
 }
 
 h1 {
-  margin: .7em 0 0 0;
-  font-size: 4em;
-  font-style: italic;
+  margin: .5em 0 0 0;
+  font-family: 'Cormorant SC';
+  font-size: 5em;
+  /* font-style: italic; */
   color: #ffcf63;
+  font-weight: normal;
+  line-height: 1em;
 }
 
 h2 {
-  margin: 0 0 1em 0;
-  font-variant: small-caps;
+  margin: 0 0 1em 5px;
+  font-variant: all-small-caps;
   font-size: 2em;
+  letter-spacing: 5px;
   color: #ffcf63;
+}
+
+button {
+  margin: 0 0.3em;
+  padding: 12px 16px;
+  border: 0;
+  border-radius: 5px;
+  background: #404040;
+  color: #fff;
+  font-family: inherit;
+  font-size: 1em;
+  cursor: pointer;
+  line-height: 1.25em;
+}
+
+button:hover {
+  background-color: #606060;
 }
 
 #root {
@@ -49,56 +81,71 @@ h2 {
 
 .ds-controls {
   margin: 0 0 2em;
+  padding: 0 1.5em;
+  max-width: 25em;
+  height: 100%;
   display: flex;
   flex-direction: column;
   flex: 3;
+  background-color: #2d2d2d;
 }
 
 .ds-controls form {
   padding: 2em 0;
 }
 
+.ds-controls form div {
+  display: flex;
+  justify-content: center;
+}
+
 .ds-controls input[type="text"] {
   width: 100%;
   padding: 8px;
   margin: 0 0 1em 0;
-  background: transparent;
+  background: #000;
   border: 1px solid #fff;
   color: #fff;
   box-sizing: border-box;
+  font-family: courier;
+  font-size: 1.1em;
 }
 
 .ds-render {
   width: 100%;
   min-height: 30em;
-  max-height: 30em;
+  height: 60vh;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .ds-diagram {
+  height: 100%;
   display: flex;
   padding: 1.5em;
   flex: 4;
   flex-wrap: wrap;
-  align-items: center;
+  justify-content: center;
   align-content: baseline;
 }
 
 .ds-console {
   max-height: 33em;
+  padding: 0 10px 0 0;
   overflow-y: scroll;
   overflow-x: hidden;
   font-size: 1.1em;
   font-weight: bold;
+  line-height: .5em;
 }
 
 
-.line-comment { color: #c1c1c1 }
-.line-input { color: #fffd92; cursor: pointer }
-.line-input:hover { color: #2323aa }
+.line-comment { color: #616161; }
+.line-input { color: #dedede; cursor: pointer }
+.line-input:hover { color: yellow; font-style: italic }
 .line-output,
-.line-output-italic { color: #ffc6a9 }
+.line-output-italic { color: #009013; }
 
 .line-input:before {
   display: "inline";
@@ -108,3 +155,28 @@ h2 {
 .line-output-italic {
   font-style: italic;
 }
+
+
+
+
+@media only screen and (max-width: 768px) {
+  .ds-render {
+    height: auto;
+  }
+}
+
+@media only screen and (max-width: 385px) {
+  html { height: auto }
+}
+
+@media only screen and (max-width: 455px) {
+  h1 {
+    margin: .5em 0 0 .25em;
+    font-size: 15vw;
+  }
+
+  h2 {
+    margin: 0 0 0 .5em;
+  }
+}
+

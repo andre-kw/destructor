@@ -60,14 +60,18 @@ export default class LinkedListPage extends Component {
       text:`linkedList.insertLast('${this.state.inputValue}')`, 
       type:'input'});
 
-    this.context.renderDiagram();
+    this.context.rerender();
     this.context.scrollConsole();
     this.setState({inputValue: ''});
     document.getElementById('value').value = '';
   }
 
   showDetails(node) {
-    node = node ? node : {value:'null'};
+    if(! node) {
+      this.state.console.push({text:`node: null`, type:'output-italic'});
+      this.context.rerender();
+      return;
+    }
     const nextNode = node.next ? node.next.value : 'null';
 
     this.state.console.push({text:`node: {`, type:'output-italic'});
@@ -111,6 +115,9 @@ export default class LinkedListPage extends Component {
               <input type="text" name="value" id="value" onKeyUp={(e) => this.setVar(e)} autoComplete="off" placeholder=">"></input>
               <div>
                 <button type="button" onClick={this.addNode}>Insert last</button>
+                <button type="button" onClick={() => {}}>Insert first</button>
+                <button type="button" onClick={() => {}}>Remove item</button>
+                <button type="button" onClick={() => {}}>Clear</button>
               </div>
             </form>
             

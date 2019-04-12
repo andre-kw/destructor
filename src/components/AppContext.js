@@ -7,7 +7,7 @@ const AppContext = React.createContext({
   scrollConsole: () => {},
   highlightNode: () => {},
   initLinkedList: () => {},
-  renderDiagram: () => {},
+  rerender: () => {},
 });
 
 export default AppContext;
@@ -23,7 +23,7 @@ export class AppProvider extends Component {
     }
 
     this.initLinkedList = this.initLinkedList.bind(this);
-    this.renderDiagram = this.renderDiagram.bind(this);
+    this.rerender = this.rerender.bind(this);
     this.highlightNode = this.highlightNode.bind(this);
   }
 
@@ -40,7 +40,7 @@ export class AppProvider extends Component {
   highlightNode(nodeId) {
     if(typeof nodeId !== 'undefined') {
       this.state.ds[0].toggleHighlight(nodeId);
-      this.renderDiagram();
+      this.rerender();
     }
   }
 
@@ -54,7 +54,7 @@ export class AppProvider extends Component {
 
   // this is necessary to redraw a diagram after changing
   // a data structure
-  renderDiagram() {
+  rerender() {
     this.setState({ds: this.state.ds});
   }
 
@@ -65,7 +65,7 @@ export class AppProvider extends Component {
       scrollConsole: this.scrollConsole,
       highlightNode: this.highlightNode,
       initLinkedList: this.initLinkedList,
-      renderDiagram: this.renderDiagram,
+      rerender: this.rerender,
     };
 
     return (

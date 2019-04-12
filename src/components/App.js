@@ -10,7 +10,7 @@ class App extends Component {
   render() {
     return <>
       <header>
-        <h1>destructor</h1>
+        <h1>destructor.</h1>
       </header>
 
       <Switch>
