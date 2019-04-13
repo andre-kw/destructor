@@ -3,19 +3,23 @@ import Console from '../components/Console';
 import AppContext from '../components/AppContext';
 import './LinkedListPage.css';
 
-function LinkedListItem(props) {
-  let className = 'render-ll-item ';
-  let text = (props.node) ? props.node.value : 'null';
+class LinkedListItem extends Component {
+  static contextType = AppContext;
 
-  if(props.node) {
-    className += (props.node.highlighted) ? 'render-highlighted' : '';
-  } else {
-    className += 'render-null';
+  render() {
+    let className = 'render-ll-item ';
+    let text = (this.props.node) ? this.props.node.value : 'null';
+  
+    if(this.props.node) {
+      className += (this.props.node.highlighted) ? 'render-highlighted' : '';
+    } else {
+      className += 'render-null';
+    }
+  
+    return (
+      <div className={className} onClick={() => this.context.logDetails(this.props.node)}>{text}</div>
+    );
   }
-
-  return (
-    <div className={className} onClick={() => props.showDetails(props.node)}>{text}</div>
-  );
 }
 
 export default class LinkedListPage extends Component {
@@ -25,18 +29,10 @@ export default class LinkedListPage extends Component {
     super(props);
 
     this.state = {
-      console: [
-        {text:'/* create a linked list */', type:'comment'},
-        {text:'let linkedList = new LinkedList();', type:'input'},
-        {text:'linkedList.insertLast("test");', type:'input', nodeId:0},
-        {text:'linkedList.insertLast("another test");', type:'input', nodeId:1},
-        {text:'[LinkedList]', type:'output'},
-      ],
       inputValue: '',
     };
 
     this.addNode = this.addNode.bind(this);
-    this.showDetails = this.showDetails.bind(this);
   }
 
   componentDidMount() {
@@ -55,7 +51,7 @@ export default class LinkedListPage extends Component {
     if(this.state.inputValue === '') return;
 
     let nodeId = this.context.ds[0].insertLast(this.state.inputValue);
-    this.state.console.push({
+    this.context.console.push({
       nodeId,
       text:`linkedList.insertLast('${this.state.inputValue}')`, 
       type:'input'});
@@ -65,21 +61,6 @@ export default class LinkedListPage extends Component {
     document.getElementById('value').value = '';
   }
 
-  showDetails(node) {
-    if(! node) {
-      this.state.console.push({text:`node: null`, type:'output-italic'});
-      this.context.rerender();
-      return;
-    }
-    const nextNode = node.next ? node.next.value : 'null';
-
-    this.state.console.push({text:`node: {`, type:'output-italic'});
-    this.state.console.push({text:`   value: "${node.value}"`, type:'output-italic'});
-    this.state.console.push({text:`   next: "${nextNode}"`, type:'output-italic'});
-    this.state.console.push({text:`}`, type:'output-italic'});
-    this.setState({inputValue: ''});
-  }
-
   renderLinkedList() {
     let jsx = [];
     let n = this.context.ds[0] ? this.context.ds[0].head : null;
@@ -87,11 +68,11 @@ export default class LinkedListPage extends Component {
     if(! n) return null;
 
     while(n) {
-      jsx.push(<LinkedListItem showDetails={this.showDetails} key={Math.random()} node={n} />);
+      jsx.push(<LinkedListItem key={Math.random()} node={n} />);
       n = n.next;
     } 
 
-    jsx.push(<LinkedListItem showDetails={this.showDetails} key='null-item' />);
+    jsx.push(<LinkedListItem key='null-item' />);
 
     return jsx;
   }
@@ -119,7 +100,7 @@ export default class LinkedListPage extends Component {
               </div>
             </form>
             
-            <Console console={this.state.console} />
+            <Console console={this.context.console} />
           </div>
         </section>
       </main>

@@ -6,6 +6,7 @@ const AppContext = React.createContext({
   ds: [],
   initLinkedList: () => {},
   rerender: () => {},
+  logDetails: () => {},
 });
 
 export default AppContext;
@@ -16,7 +17,13 @@ export class AppProvider extends Component {
     super(props);
 
     this.state = {
-      console: [],
+      console: [
+        {text:'/* create a linked list */', type:'comment'},
+        {text:'let linkedList = new LinkedList();', type:'input'},
+        {text:'linkedList.insertLast("test");', type:'input', nodeId:0},
+        {text:'linkedList.insertLast("another test");', type:'input', nodeId:1},
+        {text:'[LinkedList]', type:'output'},
+      ],
       ds: [],
     }
 
@@ -38,12 +45,28 @@ export class AppProvider extends Component {
     this.setState({ds: this.state.ds});
   }
 
+  logDetails(node) {
+    if(! node) {
+      this.state.console.push({text:`node: null`, type:'output-italic'});
+      this.rerender();
+      return;
+    }
+    const nextNode = node.next ? node.next.value : 'null';
+
+    this.state.console.push({text:`node: {`, type:'output-italic'});
+    this.state.console.push({text:`   value: "${node.value}"`, type:'output-italic'});
+    this.state.console.push({text:`   next: "${nextNode}"`, type:'output-italic'});
+    this.state.console.push({text:`}`, type:'output-italic'});
+    this.rerender();
+  }
+
   render() {
     const value = {
       ds: this.state.ds,
       console: this.state.console,
       initLinkedList: this.initLinkedList,
       rerender: this.rerender,
+      logDetails: this.logDetails,
     };
 
     return (
