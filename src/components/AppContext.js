@@ -4,8 +4,6 @@ import LinkedList from '../modules/LinkedList';
 const AppContext = React.createContext({
   console: [],
   ds: [],
-  scrollConsole: () => {},
-  highlightNode: () => {},
   initLinkedList: () => {},
   rerender: () => {},
 });
@@ -24,24 +22,6 @@ export class AppProvider extends Component {
 
     this.initLinkedList = this.initLinkedList.bind(this);
     this.rerender = this.rerender.bind(this);
-    this.highlightNode = this.highlightNode.bind(this);
-  }
-
-  scrollConsole() {
-    // the timeout is necessary because it will scroll
-    // before the element is added.
-    setTimeout(() => {
-      const el = document.getElementsByClassName('ds-console')[0];
-    
-      if(el) el.scrollTop = el.scrollHeight + 200;
-    }, 100);
-  }
-
-  highlightNode(nodeId) {
-    if(typeof nodeId !== 'undefined') {
-      this.state.ds[0].toggleHighlight(nodeId);
-      this.rerender();
-    }
   }
 
   initLinkedList() {
@@ -62,8 +42,6 @@ export class AppProvider extends Component {
     const value = {
       ds: this.state.ds,
       console: this.state.console,
-      scrollConsole: this.scrollConsole,
-      highlightNode: this.highlightNode,
       initLinkedList: this.initLinkedList,
       rerender: this.rerender,
     };

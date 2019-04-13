@@ -61,7 +61,6 @@ export default class LinkedListPage extends Component {
       type:'input'});
 
     this.context.rerender();
-    this.context.scrollConsole();
     this.setState({inputValue: ''});
     document.getElementById('value').value = '';
   }
@@ -79,7 +78,6 @@ export default class LinkedListPage extends Component {
     this.state.console.push({text:`   next: "${nextNode}"`, type:'output-italic'});
     this.state.console.push({text:`}`, type:'output-italic'});
     this.setState({inputValue: ''});
-    this.context.scrollConsole();
   }
 
   renderLinkedList() {
