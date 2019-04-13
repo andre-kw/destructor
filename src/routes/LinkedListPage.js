@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import Console from '../components/Console';
-import AppContext from '../components/AppContext';
+import LinkedListContext, { LinkedListProvider } from '../contexts/LinkedListContext';
 import './LinkedListPage.css';
 
 class LinkedListItem extends Component {
-  static contextType = AppContext;
+  static contextType = LinkedListContext;
 
   render() {
     let className = 'render-ll-item ';
@@ -23,7 +23,7 @@ class LinkedListItem extends Component {
 }
 
 export default class LinkedListPage extends Component {
-  static contextType = AppContext;
+  static contextType = LinkedListContext;
 
   constructor(props) {
     super(props);
@@ -32,7 +32,8 @@ export default class LinkedListPage extends Component {
       inputValue: '',
     };
 
-    this.addNode = this.addNode.bind(this);
+    this.dsInsertLast = this.dsInsertLast.bind(this);
+    this.highlightNode = this.highlightNode.bind(this);
   }
 
   componentDidMount() {
@@ -45,7 +46,7 @@ export default class LinkedListPage extends Component {
     }
   }
 
-  addNode(e) {
+  dsInsertLast(e) {
     e.preventDefault();
 
     if(this.state.inputValue === '') return;
@@ -59,6 +60,13 @@ export default class LinkedListPage extends Component {
     this.context.rerender();
     this.setState({inputValue: ''});
     document.getElementById('value').value = '';
+  }
+
+  highlightNode(nodeId) {
+    if(typeof nodeId !== 'undefined') {
+      this.context.ds[0].toggleHighlight(nodeId);
+      this.context.rerender();
+    }
   }
 
   renderLinkedList() {
@@ -90,17 +98,17 @@ export default class LinkedListPage extends Component {
           </div>
 
           <div className="ds-controls">
-            <form onSubmit={(e) => this.addNode(e)}>
+            <form onSubmit={(e) => this.dsInsertLast(e)}>
               <input type="text" name="value" id="value" onKeyUp={(e) => this.setVar(e)} autoComplete="off" placeholder=">"></input>
               <div>
-                <button type="button" onClick={this.addNode}>Insert last</button>
+                <button type="button" onClick={this.dsInsertLast}>Insert last</button>
                 <button type="button" onClick={() => {}}>Insert first</button>
                 <button type="button" onClick={() => {}}>Remove item</button>
                 <button type="button" onClick={() => {}}>Clear</button>
               </div>
             </form>
             
-            <Console console={this.context.console} />
+            <Console hover={this.highlightNode} console={this.context.console} />
           </div>
         </section>
       </main>

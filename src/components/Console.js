@@ -1,36 +1,24 @@
 import React, {Component} from 'react';
-import AppContext from './AppContext';
 
 class ConsoleLine extends Component {
-  static contextType = AppContext;
-
-  highlightNode(nodeId) {
-    if(typeof nodeId !== 'undefined') {
-      this.context.ds[0].toggleHighlight(nodeId);
-      this.context.rerender();
-    }
-  }
-
   render() {
     let className = 'line-' + this.props.type;
 
     return (
       <p 
         className={className} 
-        onMouseEnter={this.highlightNode.bind(this, this.props.nodeId)} 
-        onMouseLeave={this.highlightNode.bind(this, this.props.nodeId)}>{this.props.children}</p>
+        onMouseEnter={() => this.props.hover(this.props.nodeId)} 
+        onMouseLeave={() => this.props.hover(this.props.nodeId)}>{this.props.children}</p>
     );
   }
 }
 
 export default class Console extends Component {
-  static contextType = AppContext;
-
   renderConsole() {
     let jsx = [];
 
     this.props.console.forEach((line, index) => {
-      jsx.push(<ConsoleLine type={line.type} nodeId={line.nodeId} key={index}>{line.text}</ConsoleLine>);
+      jsx.push(<ConsoleLine type={line.type} nodeId={line.nodeId} hover={this.props.hover} key={index}>{line.text}</ConsoleLine>);
     });
 
     return jsx;

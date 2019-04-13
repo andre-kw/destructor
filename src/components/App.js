@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import AppContext from './AppContext';
 import LinkedListPage from '../routes/LinkedListPage';
 import './App.css';
+import { LinkedListProvider } from '../contexts/LinkedListContext';
+
+function LinkedListPath(props) {
+  return <LinkedListProvider><LinkedListPage /></LinkedListProvider>;
+}
 
 class App extends Component {
-  static contextType = AppContext;
-
   render() {
     return <>
       <header>
@@ -14,7 +16,7 @@ class App extends Component {
       </header>
 
       <Switch>
-        <Route path="/" component={LinkedListPage} />
+        <Route path="/" component={LinkedListPath} />
         <Route exact path="/linked-lists" component={LinkedListPage} />
       </Switch>
     </>;

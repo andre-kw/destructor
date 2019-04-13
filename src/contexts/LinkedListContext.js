@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import LinkedList from '../modules/LinkedList';
 
-const AppContext = React.createContext({
+const LinkedListContext = React.createContext({
   console: [],
   ds: [],
   initLinkedList: () => {},
@@ -9,10 +9,10 @@ const AppContext = React.createContext({
   logDetails: () => {},
 });
 
-export default AppContext;
+export default LinkedListContext;
 
 
-export class AppProvider extends Component {
+export class LinkedListProvider extends Component {
   constructor(props) {
     super(props);
 
@@ -29,6 +29,7 @@ export class AppProvider extends Component {
 
     this.initLinkedList = this.initLinkedList.bind(this);
     this.rerender = this.rerender.bind(this);
+    this.logDetails = this.logDetails.bind(this);
   }
 
   initLinkedList() {
@@ -70,9 +71,9 @@ export class AppProvider extends Component {
     };
 
     return (
-      <AppContext.Provider value={value}>
+      <LinkedListContext.Provider value={value}>
         {this.props.children}
-      </AppContext.Provider>
+      </LinkedListContext.Provider>
     );
   }
 }
