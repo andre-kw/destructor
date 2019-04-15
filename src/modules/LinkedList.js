@@ -127,12 +127,12 @@ export default class LinkedList {
 
   remove(item) {
     if(! this.head) {
-      return false;
+      return;
     }
 
     if(this.head.value === item) {
       this.head = this.head.next;
-      return;
+      return true;
     }
 
     let currNode = this.head;
@@ -163,7 +163,6 @@ export default class LinkedList {
 
   toggleHighlight(nodeValue) {
     let currNode = this.head;
-    console.log(nodeValue);
 
     while(currNode !== null) {
       if(currNode.value === nodeValue) {

@@ -5,6 +5,8 @@ const LinkedListContext = React.createContext({
   console: [],
   ds: [],
   initLinkedList: () => {},
+  clearLinkedList: () => {},
+  clearConsole: () => {},
   rerender: () => {},
   log: () => {},
   logDetails: () => {},
@@ -19,6 +21,7 @@ export class LinkedListProvider extends Component {
 
     this.state = {
       console: [
+        {text:'/* you can hover these console lines. try it! */', type:'comment'},
         {text:'/* create a linked list */', type:'comment'},
         {text:'let linkedList = new LinkedList();', type:'input'},
         {text:'linkedList.insertLast("test");', type:'input', nodeValue:'test'},
@@ -29,6 +32,8 @@ export class LinkedListProvider extends Component {
     }
 
     this.initLinkedList = this.initLinkedList.bind(this);
+    this.clearLinkedList = this.clearLinkedList.bind(this);
+    this.clearConsole = this.clearConsole.bind(this);
     this.rerender = this.rerender.bind(this);
     this.log = this.log.bind(this);
     this.logDetails = this.logDetails.bind(this);
@@ -40,6 +45,20 @@ export class LinkedListProvider extends Component {
     dsSLL1.insertLast('test');
     dsSLL1.insertLast('another test');
     this.setState({ds: [...this.state.ds, dsSLL1]});
+  }
+
+  clearLinkedList() {
+    const newLL = new LinkedList();
+
+    this.setState({ds: [newLL]});
+  }
+
+  clearConsole() {
+    this.setState({
+      console: [
+        {text:'// console cleared', type:'comment'},
+      ]
+    })
   }
 
   // this is necessary to redraw a diagram after changing
@@ -72,6 +91,8 @@ export class LinkedListProvider extends Component {
       ds: this.state.ds,
       console: this.state.console,
       initLinkedList: this.initLinkedList,
+      clearLinkedList: this.clearLinkedList,
+      clearConsole: this.clearConsole,
       rerender: this.rerender,
       log: this.log,
       logDetails: this.logDetails,

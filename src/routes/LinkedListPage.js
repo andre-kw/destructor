@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Console from '../components/Console';
 import LinkedListContext, { LinkedListProvider } from '../contexts/LinkedListContext';
 import './LinkedListPage.css';
+import LinkedList from '../modules/LinkedList';
 
 class LinkedListItem extends Component {
   static contextType = LinkedListContext;
@@ -35,6 +36,7 @@ export default class LinkedListPage extends Component {
     this.dsInsertLast = this.dsInsertLast.bind(this);
     this.dsInsertFirst = this.dsInsertFirst.bind(this);
     this.dsRemove = this.dsRemove.bind(this);
+    this.dsClear = this.dsClear.bind(this);
     this.highlightNode = this.highlightNode.bind(this);
   }
 
@@ -85,7 +87,6 @@ export default class LinkedListPage extends Component {
     if(this.state.inputValue === '') return;
 
     let node = this.context.ds[0].remove(this.state.inputValue);
-    console.log(node);
 
     if(! node) {
       this.context.log('node not found', 'error');
@@ -98,6 +99,19 @@ export default class LinkedListPage extends Component {
     this.context.rerender();
     this.setState({inputValue: ''});
     document.getElementById('value').value = '';
+  }
+
+  dsClear() {
+    this.context.clearLinkedList();
+    this.context.clearConsole();
+  }
+
+  dsIsEmpty() {
+    if(this.context.ds[0]) {
+      return this.context.ds[0].head === null;
+    }
+
+    return true;
   }
 
   highlightNode(nodeValue) {
@@ -132,7 +146,9 @@ export default class LinkedListPage extends Component {
 
         <section className="ds-render">
           <div className="ds-diagram">
-            {this.renderLinkedList()}
+            { this.dsIsEmpty()
+              ? <p className="alert-muted">List is empty; add some nodes!</p>
+              : this.renderLinkedList() }
           </div>
 
           <div className="ds-controls">
@@ -142,7 +158,7 @@ export default class LinkedListPage extends Component {
                 <button type="button" onClick={this.dsInsertLast}>Insert last</button>
                 <button type="button" onClick={this.dsInsertFirst}>Insert first</button>
                 <button type="button" onClick={this.dsRemove}>Remove item</button>
-                <button type="button" onClick={() => {}}>Clear</button>
+                <button type="button" onClick={this.dsClear}>Clear</button>
               </div>
             </form>
             

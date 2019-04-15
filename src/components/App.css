@@ -156,6 +156,10 @@ button:hover {
   font-style: italic;
 }
 
+.alert-muted {
+  color: lightgray;
+}
+
 
 
 
