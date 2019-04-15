@@ -13,37 +13,30 @@ export default class LinkedList {
   }
 
   insertFirst(item) {
-    let counter = 0;
-
     if(this.head) {
       let currNode = this.head;
 
       while(currNode.next !== null) {
-        counter++;
         currNode = currNode.next;
       }
     }
     
-    this.head = new _LinkedListNode(item, this.head, counter);
+    this.head = new _LinkedListNode(item, this.head);
   }
 
+  // TODO: when theres only one node, adding puts the wrong id
   insertLast(item) {
-    let counter = 1;
-
     if(! this.head) {
       this.insertFirst(item);
     } else {
-      let tempNode = this.head;
+      let currNode = this.head;
 
-      while(tempNode.next) {
-        tempNode = tempNode.next;
-        counter++;
+      while(currNode.next) {
+        currNode = currNode.next;
       }
 
-      tempNode.next = new _LinkedListNode(item, null, counter);
+      currNode.next = new _LinkedListNode(item, null);
     }
-
-    return counter;
   }
 
   insertBefore(item, key) {
@@ -134,7 +127,7 @@ export default class LinkedList {
 
   remove(item) {
     if(! this.head) {
-      return null;
+      return false;
     }
 
     if(this.head.value === item) {
@@ -151,15 +144,14 @@ export default class LinkedList {
     }
 
     if(currNode === null) {
-      console.log(`cannot find item ${item}`);
       return;
     }
 
     previousNode.next = currNode.next;
+    return true;
   }
 
   createCycle() {
-
     let currNode = this.head;
 
     while(currNode.next !== null){
@@ -169,11 +161,12 @@ export default class LinkedList {
     currNode.next = this.head;
   }
 
-  toggleHighlight(nodeId) {
+  toggleHighlight(nodeValue) {
     let currNode = this.head;
+    console.log(nodeValue);
 
     while(currNode !== null) {
-      if(currNode.id === nodeId) {
+      if(currNode.value === nodeValue) {
         currNode.highlighted = ! currNode.highlighted;
         return;
       }

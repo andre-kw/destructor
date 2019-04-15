@@ -6,6 +6,7 @@ const LinkedListContext = React.createContext({
   ds: [],
   initLinkedList: () => {},
   rerender: () => {},
+  log: () => {},
   logDetails: () => {},
 });
 
@@ -20,8 +21,8 @@ export class LinkedListProvider extends Component {
       console: [
         {text:'/* create a linked list */', type:'comment'},
         {text:'let linkedList = new LinkedList();', type:'input'},
-        {text:'linkedList.insertLast("test");', type:'input', nodeId:0},
-        {text:'linkedList.insertLast("another test");', type:'input', nodeId:1},
+        {text:'linkedList.insertLast("test");', type:'input', nodeValue:'test'},
+        {text:'linkedList.insertLast("another test");', type:'input', nodeValue:'another test'},
         {text:'[LinkedList]', type:'output'},
       ],
       ds: [],
@@ -29,6 +30,7 @@ export class LinkedListProvider extends Component {
 
     this.initLinkedList = this.initLinkedList.bind(this);
     this.rerender = this.rerender.bind(this);
+    this.log = this.log.bind(this);
     this.logDetails = this.logDetails.bind(this);
   }
 
@@ -44,6 +46,10 @@ export class LinkedListProvider extends Component {
   // a data structure
   rerender() {
     this.setState({ds: this.state.ds});
+  }
+
+  log(text, type = 'input', nodeValue) {
+    this.state.console.push({text, type, nodeValue});
   }
 
   logDetails(node) {
@@ -67,6 +73,7 @@ export class LinkedListProvider extends Component {
       console: this.state.console,
       initLinkedList: this.initLinkedList,
       rerender: this.rerender,
+      log: this.log,
       logDetails: this.logDetails,
     };
 

@@ -33,6 +33,8 @@ export default class LinkedListPage extends Component {
     };
 
     this.dsInsertLast = this.dsInsertLast.bind(this);
+    this.dsInsertFirst = this.dsInsertFirst.bind(this);
+    this.dsRemove = this.dsRemove.bind(this);
     this.highlightNode = this.highlightNode.bind(this);
   }
 
@@ -46,25 +48,61 @@ export default class LinkedListPage extends Component {
     }
   }
 
+  // data structure functions
   dsInsertLast(e) {
     e.preventDefault();
 
     if(this.state.inputValue === '') return;
 
-    let nodeId = this.context.ds[0].insertLast(this.state.inputValue);
-    this.context.console.push({
-      nodeId,
-      text:`linkedList.insertLast('${this.state.inputValue}')`, 
-      type:'input'});
+    this.context.ds[0].insertLast(this.state.inputValue);
+
+    this.context.log(
+      `linkedList.insertLast('${this.state.inputValue}')`,
+      'input',
+      this.state.inputValue);
 
     this.context.rerender();
     this.setState({inputValue: ''});
     document.getElementById('value').value = '';
   }
 
-  highlightNode(nodeId) {
-    if(typeof nodeId !== 'undefined') {
-      this.context.ds[0].toggleHighlight(nodeId);
+  dsInsertFirst() {
+    if(this.state.inputValue === '') return;
+
+    this.context.ds[0].insertFirst(this.state.inputValue);
+
+    this.context.log(
+      `linkedList.insertFirst('${this.state.inputValue}')`, 
+      'input',
+      this.state.inputValue);
+
+    this.context.rerender();
+    this.setState({inputValue: ''});
+    document.getElementById('value').value = '';
+  }
+
+  dsRemove() {
+    if(this.state.inputValue === '') return;
+
+    let node = this.context.ds[0].remove(this.state.inputValue);
+    console.log(node);
+
+    if(! node) {
+      this.context.log('node not found', 'error');
+      return;
+    }
+
+    this.context.log(`linkedList.remove('${this.state.inputValue}')`);
+    this.context.log(`removed node "${this.state.inputValue}"`, 'output');
+
+    this.context.rerender();
+    this.setState({inputValue: ''});
+    document.getElementById('value').value = '';
+  }
+
+  highlightNode(nodeValue) {
+    if(typeof nodeValue !== 'undefined') {
+      this.context.ds[0].toggleHighlight(nodeValue);
       this.context.rerender();
     }
   }
@@ -102,8 +140,8 @@ export default class LinkedListPage extends Component {
               <input type="text" name="value" id="value" onKeyUp={(e) => this.setVar(e)} autoComplete="off" placeholder=">"></input>
               <div>
                 <button type="button" onClick={this.dsInsertLast}>Insert last</button>
-                <button type="button" onClick={() => {}}>Insert first</button>
-                <button type="button" onClick={() => {}}>Remove item</button>
+                <button type="button" onClick={this.dsInsertFirst}>Insert first</button>
+                <button type="button" onClick={this.dsRemove}>Remove item</button>
                 <button type="button" onClick={() => {}}>Clear</button>
               </div>
             </form>

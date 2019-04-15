@@ -7,8 +7,8 @@ class ConsoleLine extends Component {
     return (
       <p 
         className={className} 
-        onMouseEnter={() => this.props.hover(this.props.nodeId)} 
-        onMouseLeave={() => this.props.hover(this.props.nodeId)}>{this.props.children}</p>
+        onMouseEnter={() => this.props.hover(this.props.nodeValue)} 
+        onMouseLeave={() => this.props.hover(this.props.nodeValue)}>{this.props.children}</p>
     );
   }
 }
@@ -18,7 +18,7 @@ export default class Console extends Component {
     let jsx = [];
 
     this.props.console.forEach((line, index) => {
-      jsx.push(<ConsoleLine type={line.type} nodeId={line.nodeId} hover={this.props.hover} key={index}>{line.text}</ConsoleLine>);
+      jsx.push(<ConsoleLine type={line.type} nodeValue={line.nodeValue} hover={this.props.hover} key={index}>{line.text}</ConsoleLine>);
     });
 
     return jsx;
