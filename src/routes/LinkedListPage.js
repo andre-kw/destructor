@@ -140,10 +140,6 @@ export default class LinkedListPage extends Component {
   render() {
     return (
       <main>
-        <section className="ds-select">
-          <h2>linked lists</h2>
-        </section>
-
         <section className="ds-render">
           <div className="ds-diagram">
             { this.dsIsEmpty()
