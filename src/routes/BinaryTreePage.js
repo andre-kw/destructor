@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import Console from '../components/Console';
-import LinkedListContext from '../contexts/LinkedListContext';
-import './LinkedListPage.css';
+import BinaryTreeContext from '../contexts/BinaryTreeContext';
+import './BinaryTreePage.css';
 
 class LinkedListItem extends Component {
-  static contextType = LinkedListContext;
+  static contextType = BinaryTreeContext;
 
   render() {
     let className = 'render-ll-item ';
@@ -22,8 +22,8 @@ class LinkedListItem extends Component {
   }
 }
 
-export default class LinkedListPage extends Component {
-  static contextType = LinkedListContext;
+export default class BinaryTreePage extends Component {
+  static contextType = BinaryTreeContext;
 
   constructor(props) {
     super(props);
@@ -32,15 +32,15 @@ export default class LinkedListPage extends Component {
       inputValue: '',
     };
 
-    this.dsInsertLast = this.dsInsertLast.bind(this);
-    this.dsInsertFirst = this.dsInsertFirst.bind(this);
-    this.dsRemove = this.dsRemove.bind(this);
-    this.dsClear = this.dsClear.bind(this);
-    this.highlightNode = this.highlightNode.bind(this);
+    // this.dsInsertLast = this.dsInsertLast.bind(this);
+    // this.dsInsertFirst = this.dsInsertFirst.bind(this);
+    // this.dsRemove = this.dsRemove.bind(this);
+    // this.dsClear = this.dsClear.bind(this);
+    // this.highlightNode = this.highlightNode.bind(this);
   }
 
   componentDidMount() {
-    this.context.initLinkedList();
+    this.context.initBinaryTree();
   }
 
   setVar(e) {
@@ -67,51 +67,13 @@ export default class LinkedListPage extends Component {
     document.getElementById('value').value = '';
   }
 
-  dsInsertFirst() {
-    if(this.state.inputValue === '') return;
+  // dsIsEmpty() {
+  //   if(this.context.ds[0]) {
+  //     return this.context.ds[0].head === null;
+  //   }
 
-    this.context.ds[0].insertFirst(this.state.inputValue);
-
-    this.context.log(
-      `linkedList.insertFirst('${this.state.inputValue}')`, 
-      'input',
-      this.state.inputValue);
-
-    this.context.rerender();
-    this.setState({inputValue: ''});
-    document.getElementById('value').value = '';
-  }
-
-  dsRemove() {
-    if(this.state.inputValue === '') return;
-
-    let node = this.context.ds[0].remove(this.state.inputValue);
-
-    if(! node) {
-      this.context.log('node not found', 'error');
-      return;
-    }
-
-    this.context.log(`linkedList.remove('${this.state.inputValue}')`);
-    this.context.log(`removed node "${this.state.inputValue}"`, 'output');
-
-    this.context.rerender();
-    this.setState({inputValue: ''});
-    document.getElementById('value').value = '';
-  }
-
-  dsClear() {
-    this.context.clearLinkedList();
-    this.context.clearConsole();
-  }
-
-  dsIsEmpty() {
-    if(this.context.ds[0]) {
-      return this.context.ds[0].head === null;
-    }
-
-    return true;
-  }
+  //   return true;
+  // }
 
   highlightNode(nodeValue) {
     if(typeof nodeValue !== 'undefined') {
@@ -120,7 +82,7 @@ export default class LinkedListPage extends Component {
     }
   }
 
-  renderLinkedList() {
+  renderBinaryTree() {
     let jsx = [];
     let n = this.context.ds[0] ? this.context.ds[0].head : null;
 
@@ -141,19 +103,16 @@ export default class LinkedListPage extends Component {
       <main>
         <section className="ds-render">
           <div className="ds-diagram">
-            { this.dsIsEmpty()
-              ? <p className="alert-muted">List is empty; add some nodes!</p>
-              : this.renderLinkedList() }
+            { true
+              ? <p className="alert-muted">Binary tree is empty; add some nodes!</p>
+              : this.renderBinaryTree() }
           </div>
 
           <div className="ds-controls">
             <form onSubmit={(e) => this.dsInsertLast(e)}>
               <input type="text" name="value" id="value" onKeyUp={(e) => this.setVar(e)} autoComplete="off" placeholder=">"></input>
               <div>
-                <button type="button" onClick={this.dsInsertLast}>Insert last</button>
-                <button type="button" onClick={this.dsInsertFirst}>Insert first</button>
-                <button type="button" onClick={this.dsRemove}>Remove item</button>
-                <button type="button" onClick={this.dsClear}>Clear</button>
+                <button type="button" onClick={this.dsInsertLast}>Insert</button>
               </div>
             </form>
             

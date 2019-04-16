@@ -1,0 +1,40 @@
+.render-ll-item {
+  margin: 1em;
+  padding: 1em;
+  max-width: 10em;
+  position: relative;
+  background-color: #10bdff;
+  color: #fff;
+  cursor: pointer;
+  word-break: break-all;
+  font-size: 1.25em;
+  align-self: flex-start;
+  border-right: 10px solid white;
+}
+
+.render-ll-item:after {
+  display: block;
+  position: absolute;
+  content: "\21D2";
+  bottom: 6px;
+  left: 102%;
+  font-size: 2em;
+  color: #fff;
+}
+
+.render-ll-item:last-of-type { margin-bottom: 3em }
+
+.render-ll-item.render-null {
+  color: lightgray;
+  background-color: gray;
+  border: 0;
+}
+
+.render-ll-item.render-null:after {
+  display: none;
+}
+
+.render-highlighted {
+  background-color: #fff;
+  color: blue;
+}

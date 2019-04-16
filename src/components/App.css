@@ -37,26 +37,32 @@ main {
 }
 
 header {
-  flex: 2.4;
+  flex: 4;
 }
 
 nav {
-  padding: 3em 2em;
-  color: #009fff;
-  flex: 2;
-  text-align: center;
+  padding: 3em 0;
+  color: #707070;
+  flex: 3;
+  text-align: right;
 }
 
 nav a,
 nav a:visited {
-  color: inherit;
-  font-size: 1.25em;
+  font-size: 1em;
   text-decoration: none;
   display: inline-block;
-  padding: 10px;
+  padding: 4px 10px;
+  background-color: #2d2d2d;
 }
 
-nav a:hover { text-decoration: underline }
+nav a:hover {
+  text-decoration: underline;
+  background-color: #505050;
+}
+
+.nav-ll { color: #3da8f0 }
+.nav-bst { color: #b32add }
 
 h1 {
   margin: .5em 0 0 0;
@@ -95,10 +101,12 @@ button:hover {
 
 #root {
   width: 93%;
+  max-width: 95em;
   margin: 0 auto;
 }
 
 #root-container {
+  padding-top: 1em;
   display: flex;
   flex-wrap: wrap;
 }
