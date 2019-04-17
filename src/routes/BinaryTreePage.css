@@ -12,6 +12,12 @@
   border-right: 10px solid white;
 }
 
+.render-bst-item {
+  margin: .5em;
+  padding: .5em;
+  background-color: deeppink;
+}
+
 .render-ll-item:after {
   display: block;
   position: absolute;
@@ -24,7 +30,7 @@
 
 .render-ll-item:last-of-type { margin-bottom: 3em }
 
-.render-ll-item.render-null {
+.render-bst-item.render-null {
   color: lightgray;
   background-color: gray;
   border: 0;

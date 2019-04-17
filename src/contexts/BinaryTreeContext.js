@@ -40,8 +40,9 @@ export class BinaryTreeProvider extends Component {
   }
 
   initBinaryTree() {
-    const dsBST1 = new BinarySearchTree();
-    //dsBST1.insertLast('test');
+    const dsBST1 = new BinarySearchTree(1, 1);
+    dsBST1.insert(3, 3);
+    dsBST1.insert(2, 2);
     this.setState({ds: [dsBST1, ...this.state.ds]});
   }
 
