@@ -102,16 +102,12 @@ export default class BinaryTreePage extends Component {
     const queue = [values[0]];
 
     while (queue.length) {
-      console.log(final);
+      console.log(queue);
       let node = queue.shift();
       final.push(node.value);
       console.log(`${node.value}'s left: ${node.left ? node.left.value : null}`)
       console.log(`${node.value}'s right: ${node.right ? node.right.value : null}`)
 
-      if(node.parent && ! node.parent.right) {
-        final.push('break');
-      }
-      
       if (node.left) {
         queue.push(node.left);
       }
