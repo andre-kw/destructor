@@ -51,33 +51,16 @@ export default class StackPage extends Component {
   // data structure functions //
   dsPush = (e) => {
     e.preventDefault();
-
-    if(this.state.inputValue === '') return;
-
-    this.context.ds[0].push(this.state.inputValue);
-
-    this.context.log(
-      `stack.push('${this.state.inputValue}')`,
-      'input',
-      this.state.inputValue);
-
-    this.context.rerender();
+    this.context.stackPush(this.state.inputValue);
+    
     this.setState({inputValue: ''});
     document.getElementById('value').value = '';
   }
 
   dsPop = (e) => {
     e.preventDefault();
+    this.context.stackPop();
 
-    if(this.context.ds[0].top === null) return;
-
-    this.context.ds[0].pop();
-
-    this.context.log(
-      `stack.pop()`,
-      'input');
-
-    this.context.rerender();
     this.setState({inputValue: ''});
     document.getElementById('value').value = '';
   }
@@ -89,6 +72,13 @@ export default class StackPage extends Component {
 
     return true;
   }
+
+  // highlightNode = (nodeValue) => {
+  //   if(typeof nodeValue !== 'undefined') {
+  //     this.context.ds[0].toggleHighlight(nodeValue);
+  //     this.context.rerender();
+  //   }
+  // }
 
   renderStack = () => {
     let jsx = [];

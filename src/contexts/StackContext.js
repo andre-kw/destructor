@@ -5,6 +5,8 @@ const StackContext = React.createContext({
   console: [],
   ds: [],
   initStack: () => {},
+  stackPush: () => {},
+  stackPop: () => {},
   // clearLinkedList: () => {},
   clearConsole: () => {},
   rerender: () => {},
@@ -39,6 +41,31 @@ export class StackProvider extends Component {
     this.setState({ds: [dsStack1, ...this.state.ds]});
   }
 
+  stackPush = (value) => {
+    if(value === '') return;
+
+    this.state.ds[0].push(value);
+
+    this.log(
+      `stack.push('${value}')`,
+      'input',
+      value);
+
+    this.rerender();
+  }
+
+  stackPop = () => {
+    if(this.state.ds[0].top === null) return;
+
+    this.state.ds[0].pop();
+
+    this.log(
+      `stack.pop()`,
+      'input');
+
+    this.rerender();
+  }
+
   clearConsole = () => {
     this.setState({
       console: [
@@ -66,6 +93,8 @@ export class StackProvider extends Component {
       ds: this.state.ds,
       console: this.state.console,
       initStack: this.initStack,
+      stackPush: this.stackPush,
+      stackPop: this.stackPop,
       clearConsole: this.clearConsole,
       rerender: this.rerender,
       log: this.log,
