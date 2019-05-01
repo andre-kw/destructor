@@ -14,6 +14,10 @@ class ConsoleLine extends Component {
 }
 
 export default class Console extends Component {
+  static defaultProps = {
+    hover: () => {},
+  }
+
   renderConsole() {
     let jsx = [];
 
