@@ -3,10 +3,12 @@ import Console from '../components/Console';
 import LinkedListContext, { LinkedListProvider } from '../contexts/LinkedListContext';
 import './LinkedListPage.css';
 
+// path for router to use
 export function LinkedListPath(props) {
   return <LinkedListProvider><LinkedListPage /></LinkedListProvider>;
 }
 
+// diagram item
 class LinkedListItem extends Component {
   static contextType = LinkedListContext;
 
@@ -26,6 +28,7 @@ class LinkedListItem extends Component {
   }
 }
 
+
 export default class LinkedListPage extends Component {
   static contextType = LinkedListContext;
 
@@ -35,12 +38,6 @@ export default class LinkedListPage extends Component {
     this.state = {
       inputValue: '',
     };
-
-    this.dsInsertLast = this.dsInsertLast.bind(this);
-    this.dsInsertFirst = this.dsInsertFirst.bind(this);
-    this.dsRemove = this.dsRemove.bind(this);
-    this.dsClear = this.dsClear.bind(this);
-    this.highlightNode = this.highlightNode.bind(this);
   }
 
   componentDidMount() {
@@ -53,8 +50,8 @@ export default class LinkedListPage extends Component {
     }
   }
 
-  // data structure functions
-  dsInsertLast(e) {
+  // data structure functions //
+  dsInsertLast = (e) => {
     e.preventDefault();
 
     if(this.state.inputValue === '') return;
@@ -71,7 +68,7 @@ export default class LinkedListPage extends Component {
     document.getElementById('value').value = '';
   }
 
-  dsInsertFirst() {
+  dsInsertFirst = () => {
     if(this.state.inputValue === '') return;
 
     this.context.ds[0].insertFirst(this.state.inputValue);
@@ -86,7 +83,7 @@ export default class LinkedListPage extends Component {
     document.getElementById('value').value = '';
   }
 
-  dsRemove() {
+  dsRemove = () => {
     if(this.state.inputValue === '') return;
 
     let node = this.context.ds[0].remove(this.state.inputValue);
@@ -104,12 +101,12 @@ export default class LinkedListPage extends Component {
     document.getElementById('value').value = '';
   }
 
-  dsClear() {
+  dsClear = () => {
     this.context.clearLinkedList();
     this.context.clearConsole();
   }
 
-  dsIsEmpty() {
+  dsIsEmpty = () => {
     if(this.context.ds[0]) {
       return this.context.ds[0].head === null;
     }
@@ -117,7 +114,7 @@ export default class LinkedListPage extends Component {
     return true;
   }
 
-  highlightNode(nodeValue) {
+  highlightNode = (nodeValue) => {
     if(typeof nodeValue !== 'undefined') {
       this.context.ds[0].toggleHighlight(nodeValue);
       this.context.rerender();
