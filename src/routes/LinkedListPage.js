@@ -1,7 +1,11 @@
 import React, {Component} from 'react';
 import Console from '../components/Console';
-import LinkedListContext from '../contexts/LinkedListContext';
+import LinkedListContext, { LinkedListProvider } from '../contexts/LinkedListContext';
 import './LinkedListPage.css';
+
+export function LinkedListPath(props) {
+  return <LinkedListProvider><LinkedListPage /></LinkedListProvider>;
+}
 
 class LinkedListItem extends Component {
   static contextType = LinkedListContext;

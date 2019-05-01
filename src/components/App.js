@@ -1,18 +1,8 @@
 import React, { Component } from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
-import LinkedListPage from '../routes/LinkedListPage';
-import BinaryTreePage from '../routes/BinaryTreePage';
+import { LinkedListPath } from '../routes/LinkedListPage';
+import { BinaryTreePath } from '../routes/BinaryTreePage';
 import './App.css';
-import { LinkedListProvider } from '../contexts/LinkedListContext';
-import { BinaryTreeProvider } from '../contexts/BinaryTreeContext';
-
-function LinkedListPath(props) {
-  return <LinkedListProvider><LinkedListPage /></LinkedListProvider>;
-}
-
-function BinaryTreePath(props) {
-  return <BinaryTreeProvider><BinaryTreePage /></BinaryTreeProvider>;
-}
 
 class App extends Component {
   render() {

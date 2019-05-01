@@ -1,7 +1,12 @@
 import React, {Component} from 'react';
 import Console from '../components/Console';
-import BinaryTreeContext from '../contexts/BinaryTreeContext';
+import BinaryTreeContext, { BinaryTreeProvider } from '../contexts/BinaryTreeContext';
+
 import './BinaryTreePage.css';
+
+export function BinaryTreePath(props) {
+  return <BinaryTreeProvider><BinaryTreePage /></BinaryTreeProvider>;
+}
 
 class BinaryTreeItem extends Component {
   static contextType = BinaryTreeContext;
@@ -107,7 +112,7 @@ export default class BinaryTreePage extends Component {
       final.push(node.value);
       console.log(`${node.value}'s left: ${node.left ? node.left.value : null}`)
       console.log(`${node.value}'s right: ${node.right ? node.right.value : null}`)
-
+      
       if (node.left) {
         queue.push(node.left);
       }
