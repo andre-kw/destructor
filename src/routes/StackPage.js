@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Console from '../components/Console';
 import StackContext, { StackProvider } from '../contexts/StackContext';
+import './StackPage.css';
 
 export function StackPath(props) {
   return <StackProvider><StackPage /></StackProvider>;
@@ -48,8 +49,37 @@ export default class StackPage extends Component {
   }
 
   // data structure functions //
-  dsInsert = () => {
-    return null;
+  dsPush = (e) => {
+    e.preventDefault();
+
+    if(this.state.inputValue === '') return;
+
+    this.context.ds[0].push(this.state.inputValue);
+
+    this.context.log(
+      `stack.push('${this.state.inputValue}')`,
+      'input',
+      this.state.inputValue);
+
+    this.context.rerender();
+    this.setState({inputValue: ''});
+    document.getElementById('value').value = '';
+  }
+
+  dsPop = (e) => {
+    e.preventDefault();
+
+    if(this.context.ds[0].top === null) return;
+
+    this.context.ds[0].pop();
+
+    this.context.log(
+      `stack.pop()`,
+      'input');
+
+    this.context.rerender();
+    this.setState({inputValue: ''});
+    document.getElementById('value').value = '';
   }
 
   dsIsEmpty = () => {
@@ -80,21 +110,22 @@ export default class StackPage extends Component {
     return (
       <main>
         <section className="ds-render">
-          <div className="ds-diagram">
+          <div className="ds-diagram ds-stack-diagram">
             { this.dsIsEmpty()
               ? <p className="alert-muted">Stack is empty; add some nodes!</p>
               : this.renderStack() }
           </div>
 
           <div className="ds-controls">
-            <form onSubmit={() => {}}>
+            <form onSubmit={this.dsPush}>
               <input type="text" name="value" id="value" onKeyUp={(e) => this.setVar(e)} autoComplete="off" placeholder=">"></input>
               <div>
-                <button type="button" onClick={this.dsInsert}>Insert</button>
+                <button type="button" onClick={this.dsPush}>Push</button>
+                <button type="button" onClick={this.dsPop}>Pop</button>
               </div>
             </form>
             
-            {/* <Console hover={this.highlightNode} console={this.context.console} /> */}
+            <Console console={this.context.console} />
           </div>
         </section>
       </main>

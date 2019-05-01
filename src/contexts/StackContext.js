@@ -6,9 +6,9 @@ const StackContext = React.createContext({
   ds: [],
   initStack: () => {},
   // clearLinkedList: () => {},
-  // clearConsole: () => {},
-  // rerender: () => {},
-  // log: () => {},
+  clearConsole: () => {},
+  rerender: () => {},
+  log: () => {},
   logDetails: () => {},
 });
 
@@ -34,8 +34,8 @@ export class StackProvider extends Component {
 
   initStack = () => {
     const dsStack1 = new Stack();
-    dsStack1.push('last in');
     dsStack1.push('first out');
+    dsStack1.push('last in');
     this.setState({ds: [dsStack1, ...this.state.ds]});
   }
 
@@ -66,6 +66,10 @@ export class StackProvider extends Component {
       ds: this.state.ds,
       console: this.state.console,
       initStack: this.initStack,
+      clearConsole: this.clearConsole,
+      rerender: this.rerender,
+      log: this.log,
+      logDetails: this.logDetails,
     };
 
     return (

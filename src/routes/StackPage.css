@@ -1,0 +1,35 @@
+.ds-diagram.ds-stack-diagram {
+  flex-direction: column;
+  align-content: center;
+  justify-content: normal;
+}
+
+.render-stack-item {
+  margin: .5em auto;
+  padding: 1em;
+  min-width: 50%;
+  max-width: 10em;
+  position: relative;
+  background-color: #45da86;
+  color: #fff;
+  cursor: pointer;
+  word-break: break-all;
+  font-size: 1.25em;
+  align-self: flex-start;
+  border-bottom: 5px solid white;
+  text-align: center;
+}
+
+.render-stack-item:after {
+  display: block;
+  position: absolute;
+  content: "\1F847";
+  bottom: -25px;
+  left: 45%;
+  font-size: 1.2em;
+  color: #fff;
+}
+
+.render-stack-item:last-of-type:after {
+  display: none;
+}
