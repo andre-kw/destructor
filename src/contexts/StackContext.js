@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-//import BinarySearchTree from '../modules/BinarySearchTree';
+import Stack from '../modules/Stack';
 
 const StackContext = React.createContext({
   console: [],
@@ -9,7 +9,7 @@ const StackContext = React.createContext({
   // clearConsole: () => {},
   // rerender: () => {},
   // log: () => {},
-  // logDetails: () => {},
+  logDetails: () => {},
 });
 
 export default StackContext;
@@ -33,10 +33,10 @@ export class StackProvider extends Component {
   }
 
   initStack = () => {
-    // const dsBST1 = new BinarySearchTree(1, 1);
-    // dsBST1.insert(3, 3);
-    // dsBST1.insert(2, 2);
-    // this.setState({ds: [dsBST1, ...this.state.ds]});
+    const dsStack1 = new Stack();
+    dsStack1.push('last in');
+    dsStack1.push('first out');
+    this.setState({ds: [dsStack1, ...this.state.ds]});
   }
 
   clearConsole = () => {
@@ -55,6 +55,10 @@ export class StackProvider extends Component {
 
   log = (text, type = 'input', nodeValue) => {
     this.state.console.push({text, type, nodeValue});
+  }
+
+  logDetails = () => {
+    return false;
   }
 
   render() {

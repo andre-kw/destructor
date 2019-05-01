@@ -6,6 +6,25 @@ export function StackPath(props) {
   return <StackProvider><StackPage /></StackProvider>;
 }
 
+class StackItem extends Component {
+  static contextType = StackContext;
+
+  render() {
+    let className = 'render-stack-item ';
+    let text = (this.props.node) ? this.props.node.value : 'null';
+  
+    if(this.props.node) {
+      // className += (this.props.node.highlighted) ? 'render-highlighted' : '';
+    } else {
+      className += 'render-null';
+    }
+  
+    return (
+      <div className={className} onClick={() => this.context.logDetails(this.props.node)}>{text}</div>
+    );
+  }
+}
+
 
 export default class StackPage extends Component {
   static contextType = StackContext;
@@ -17,8 +36,12 @@ export default class StackPage extends Component {
       inputValue: '',
     };
   }
+
+  componentDidMount() {
+    this.context.initStack();
+  }
   
-  setVar(e) {
+  setVar = (e) => {
     if(e.target.name === 'value') {
       this.setState({inputValue: e.target.value});
     }
@@ -30,15 +53,27 @@ export default class StackPage extends Component {
   }
 
   dsIsEmpty = () => {
-    // if(this.context.ds[0]) {
-    //   return this.context.ds[0].head === null;
-    // }
+    if(this.context.ds[0]) {
+      return this.context.ds[0].top === null;
+    }
 
     return true;
   }
 
   renderStack = () => {
-    return '';
+    let jsx = [];
+    let n = this.context.ds[0] ? this.context.ds[0].top : null;
+
+    if(! n) return null;
+
+    while(n) {
+      jsx.push(<StackItem key={Math.random()} node={n} />);
+      n = n.next;
+    } 
+
+    //jsx.push(<StackItem key='null-item' />);
+
+    return jsx;
   }
 
   render() {
