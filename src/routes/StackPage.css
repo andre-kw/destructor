@@ -30,6 +30,9 @@
   color: #fff;
 }
 
+.render-stack-item:last-of-type {
+  border-color: gray;
+}
 .render-stack-item:last-of-type:after {
   display: none;
 }
