@@ -15,7 +15,7 @@ class StackItem extends Component {
     let text = (this.props.node) ? this.props.node.value : 'null';
   
     if(this.props.node) {
-      // className += (this.props.node.highlighted) ? 'render-highlighted' : '';
+      className += (this.props.node.highlighted) ? 'render-highlighted' : '';
     } else {
       className += 'render-null';
     }
@@ -48,21 +48,21 @@ export default class StackPage extends Component {
     }
   }
 
-  // data structure functions //
-  dsPush = (e) => {
-    e.preventDefault();
-    this.context.stackPush(this.state.inputValue);
-    
+  resetInput = () => {
     this.setState({inputValue: ''});
     document.getElementById('value').value = '';
   }
 
-  dsPop = (e) => {
+  // data structure functions //
+  dsPush = (e) => {
     e.preventDefault();
-    this.context.stackPop();
+    this.context.stackPush(this.state.inputValue);
+    this.resetInput();
+  }
 
-    this.setState({inputValue: ''});
-    document.getElementById('value').value = '';
+  dsPop = () => {
+    this.context.stackPop();
+    this.resetInput();
   }
 
   dsIsEmpty = () => {
@@ -73,12 +73,12 @@ export default class StackPage extends Component {
     return true;
   }
 
-  // highlightNode = (nodeValue) => {
-  //   if(typeof nodeValue !== 'undefined') {
-  //     this.context.ds[0].toggleHighlight(nodeValue);
-  //     this.context.rerender();
-  //   }
-  // }
+  highlightNode = (nodeValue) => {
+    if(typeof nodeValue !== 'undefined') {
+      this.context.ds[0].toggleHighlight(nodeValue);
+      this.context.rerender();
+    }
+  }
 
   renderStack = () => {
     let jsx = [];
@@ -115,7 +115,7 @@ export default class StackPage extends Component {
               </div>
             </form>
             
-            <Console console={this.context.console} />
+            <Console hover={this.highlightNode} console={this.context.console} />
           </div>
         </section>
       </main>

@@ -2,6 +2,7 @@ class _StackNode {
   constructor(value, next) {
     this.value = value;
     this.next = next;
+    this.highlighted = false;
   }
 }
 
@@ -21,5 +22,17 @@ export default class Stack {
     const node = this.top;
     this.top = node.next;
     return node.value;
+  }
+
+  toggleHighlight(nodeValue) {
+    let currNode = this.top;
+
+    while(currNode !== null) {
+      if(currNode.value === nodeValue) {
+        currNode.highlighted = ! currNode.highlighted;
+        return;
+      }
+      currNode = currNode.next;
+    }
   }
 }
