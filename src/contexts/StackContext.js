@@ -7,7 +7,7 @@ const StackContext = React.createContext({
   initStack: () => {},
   stackPush: () => {},
   stackPop: () => {},
-  // clearLinkedList: () => {},
+  clearStack: () => {},
   clearConsole: () => {},
   rerender: () => {},
   log: () => {},
@@ -66,6 +66,12 @@ export class StackProvider extends Component {
     this.rerender();
   }
 
+  clearStack = () => {
+    const newLL = new Stack();
+
+    this.setState({ds: [newLL]});
+  }
+
   clearConsole = () => {
     this.setState({
       console: [
@@ -95,6 +101,7 @@ export class StackProvider extends Component {
       initStack: this.initStack,
       stackPush: this.stackPush,
       stackPop: this.stackPop,
+      clearStack: this.clearStack,
       clearConsole: this.clearConsole,
       rerender: this.rerender,
       log: this.log,

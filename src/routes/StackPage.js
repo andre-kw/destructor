@@ -65,6 +65,11 @@ export default class StackPage extends Component {
     this.resetInput();
   }
 
+  dsClear = () => {
+    this.context.clearStack();
+    this.context.clearConsole();
+  }
+
   dsIsEmpty = () => {
     if(this.context.ds[0]) {
       return this.context.ds[0].top === null;
@@ -112,6 +117,7 @@ export default class StackPage extends Component {
               <div>
                 <button type="button" onClick={this.dsPush}>Push</button>
                 <button type="button" onClick={this.dsPop}>Pop</button>
+                <button type="button" onClick={this.dsClear}>Clear</button>
               </div>
             </form>
             
