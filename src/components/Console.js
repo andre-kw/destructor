@@ -18,7 +18,16 @@ export default class Console extends Component {
     hover: () => {},
   }
 
-  renderConsole() {
+  scrollConsole = () => {
+    // stop div from scrolling before element is added
+    setTimeout(() => {
+      const el = document.getElementsByClassName('ds-console')[0];
+    
+      if(el) el.scrollTop = el.scrollHeight + 200;
+    }, 100);
+  }
+
+  renderConsole = () => {
     let jsx = [];
 
     this.props.console.forEach((line, index) => {
@@ -26,16 +35,6 @@ export default class Console extends Component {
     });
 
     return jsx;
-  }
-
-  scrollConsole() {
-    // the timeout is necessary because it will scroll
-    // before the element is added.
-    setTimeout(() => {
-      const el = document.getElementsByClassName('ds-console')[0];
-    
-      if(el) el.scrollTop = el.scrollHeight + 200;
-    }, 100);
   }
 
   render() {

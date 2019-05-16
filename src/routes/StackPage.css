@@ -1,14 +1,14 @@
 .ds-diagram.ds-stack-diagram {
   flex-direction: column;
-  align-content: center;
+  align-content: space-evenly;
   justify-content: normal;
 }
 
 .render-stack-item {
   margin: .5em auto;
-  padding: 1em;
-  min-width: 50%;
-  max-width: 10em;
+  padding: .6em 1em;
+  min-width: 25%;
+  max-width: 9em;
   position: relative;
   background-color: #12c35f;
   color: #fff;
@@ -35,4 +35,9 @@
 }
 .render-stack-item:last-of-type:after {
   display: none;
+}
+
+.render-highlighted {
+  background-color: #fff;
+  color: green;
 }

@@ -26,9 +26,9 @@ export class StackProvider extends Component {
         {text:'/* you can hover these console lines. try it! */', type:'comment'},
         {text:'/* create a stack */', type:'comment'},
         {text:'let stack = new Stack();', type:'input'},
-        // {text:'linkedList.insertLast("test");', type:'input', nodeValue:'test'},
-        // {text:'linkedList.insertLast("another test");', type:'input', nodeValue:'another test'},
         {text:'[Stack]', type:'output'},
+        {text:'stack.push("first out");', type:'input', nodeValue:'first out'},
+        {text:'stack.push("last in");', type:'input', nodeValue:'last in'},
       ],
       ds: [],
     }
