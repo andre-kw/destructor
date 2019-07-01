@@ -43,6 +43,12 @@ header {
   display: flex;
 }
 
+footer {
+  margin: 3em;
+  text-align: center;
+  color: gray;
+}
+
 nav {
   padding: 3em 0;
   color: #707070;
@@ -136,9 +142,10 @@ code {
 }
 
 .flex-main {
+  margin-bottom: 20%;
   display: flex;
   justify-content: center;
-  flex-wrap: wrap-reverse;
+  flex-wrap: wrap;
 }
 
 
