@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Console from '../components/Console';
 import LinkedListContext, { LinkedListProvider } from '../contexts/LinkedListContext';
+import AppContext from '../contexts/AppContext';
 import './LinkedListPage.css';
 
 // path for router to use
@@ -10,7 +11,7 @@ export function LinkedListPath(props) {
 
 // diagram item
 class LinkedListItem extends Component {
-  static contextType = LinkedListContext;
+  static contextType = AppContext;
 
   render() {
     let className = 'render-ll-item ';
@@ -30,7 +31,7 @@ class LinkedListItem extends Component {
 
 
 export default class LinkedListPage extends Component {
-  static contextType = LinkedListContext;
+  static contextType = AppContext;
 
   constructor(props) {
     super(props);
@@ -41,7 +42,7 @@ export default class LinkedListPage extends Component {
   }
 
   componentDidMount() {
-    this.context.initLinkedList();
+    this.context.initDs('linked-list');
   }
 
   setVar(e) {
@@ -57,14 +58,14 @@ export default class LinkedListPage extends Component {
     if(this.state.inputValue === '') return;
 
     this.context.highlightButton('ds-btn-insertlast');
-    this.context.ds[0].insertLast(this.state.inputValue);
+    this.context.ds.insertLast(this.state.inputValue);
 
     this.context.log(
       `linkedList.insertLast('${this.state.inputValue}')`,
       'input',
       this.state.inputValue);
 
-    this.context.rerender();
+    this.context.rerenderDiagram();
     this.setState({inputValue: ''});
     document.getElementById('value').value = '';
   }
@@ -72,14 +73,14 @@ export default class LinkedListPage extends Component {
   dsInsertFirst = () => {
     if(this.state.inputValue === '') return;
 
-    this.context.ds[0].insertFirst(this.state.inputValue);
+    this.context.ds.insertFirst(this.state.inputValue);
 
     this.context.log(
       `linkedList.insertFirst('${this.state.inputValue}')`, 
       'input',
       this.state.inputValue);
 
-    this.context.rerender();
+    this.context.rerenderDiagram();
     this.setState({inputValue: ''});
     document.getElementById('value').value = '';
   }
@@ -87,7 +88,7 @@ export default class LinkedListPage extends Component {
   dsRemove = () => {
     if(this.state.inputValue === '') return;
 
-    let node = this.context.ds[0].remove(this.state.inputValue);
+    let node = this.context.ds.remove(this.state.inputValue);
 
     if(! node) {
       this.context.log('node not found', 'error');
@@ -97,19 +98,18 @@ export default class LinkedListPage extends Component {
     this.context.log(`linkedList.remove('${this.state.inputValue}')`);
     this.context.log(`removed node "${this.state.inputValue}"`, 'output');
 
-    this.context.rerender();
+    this.context.rerenderDiagram();
     this.setState({inputValue: ''});
     document.getElementById('value').value = '';
   }
 
   dsClear = () => {
-    this.context.clearLinkedList();
-    this.context.clearConsole();
+    this.context.clearDs();
   }
 
   dsIsEmpty = () => {
-    if(this.context.ds[0]) {
-      return this.context.ds[0].head === null;
+    if(this.context.ds) {
+      return this.context.ds.head === null;
     }
 
     return true;
@@ -117,14 +117,14 @@ export default class LinkedListPage extends Component {
 
   highlightNode = (nodeValue) => {
     if(typeof nodeValue !== 'undefined') {
-      this.context.ds[0].toggleHighlight(nodeValue);
-      this.context.rerender();
+      this.context.ds.toggleHighlight(nodeValue);
+      this.context.rerenderDiagram();
     }
   }
 
   renderLinkedList() {
     let jsx = [];
-    let n = this.context.ds[0] ? this.context.ds[0].head : null;
+    let n = this.context.ds ? this.context.ds.head : null;
 
     if(! n) return null;
 
@@ -141,17 +141,12 @@ export default class LinkedListPage extends Component {
   render() {
     return (
       <main className="flex-main">
-        <section className="ds-diagram">
-          { this.dsIsEmpty()
-            ? <p className="alert-muted">List is empty; add some nodes!</p>
-            : this.renderLinkedList() }
-        </section>
-
-        <section className="ds-controls">
+        <section className="ds-info">
+          <div className="ds-controls">
           <Console hover={this.highlightNode} console={this.context.console} />
 
           <form onSubmit={(e) => this.dsInsertLast(e)}>
-            <input type="text" name="value" id="value" onKeyUp={(e) => this.setVar(e)} autoComplete="off" placeholder="> type text here"></input>
+            <input type="text" name="value" id="value" onKeyUp={(e) => this.setVar(e)} autoComplete="off" maxLength="10" placeholder="> type text here"></input>
             <div>
               <button type="button" id="ds-btn-insertlast" onClick={this.dsInsertLast}>Insert last</button>
               <button type="button" onClick={this.dsInsertFirst}>Insert first</button>
@@ -159,6 +154,13 @@ export default class LinkedListPage extends Component {
               <button type="button" onClick={this.dsClear}>Clear</button>
             </div>
           </form>
+          </div>
+        </section>
+
+        <section className="ds-diagram">
+          { this.dsIsEmpty()
+            ? <p className="alert-muted">List is empty; add some nodes!</p>
+            : this.renderLinkedList() }
         </section>
       </main>
     );

@@ -172,5 +172,16 @@ export default class LinkedList {
       currNode = currNode.next;
     }
   }
-}
 
+  static printNode(node) {
+    const nextNode = node.next ? node.next.value : 'null';
+    const output = [];
+
+    output.push({text:`node: {`, type:'output-italic'});
+    output.push({text:`   value: "${node.value}"`, type:'output-italic'});
+    output.push({text:`   next: "${nextNode}"`, type:'output-italic'});
+    output.push({text:`}`, type:'output-italic'});
+
+    return output;
+  }
+}
