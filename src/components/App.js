@@ -10,22 +10,26 @@ class App extends Component {
     return (
       <div id="root-container">
         <header>
-          <h1>destructor.</h1>
-          <h2>
-            <Switch>
-              <Route exact path="/" render={() => 'Linked list'} />
-              <Route exact path="/structure/linked-list" render={() => 'Linked list'} />
-              <Route exact path="/structure/stack" render={() => 'Stack'} />
-              <Route exact path="/structure/binary-tree" render={() => 'Binary tree'} />
-            </Switch>
-          </h2>
+          <section className="header-left">
+            <h1>destructor.</h1>
+            <h2>
+              <Switch>
+                <Route exact path="/" render={() => 'Linked list'} />
+                <Route exact path="/structure/linked-list" render={() => 'Linked list'} />
+                <Route exact path="/structure/stack" render={() => 'Stack'} />
+                <Route exact path="/structure/binary-tree" render={() => 'Binary tree'} />
+              </Switch>
+            </h2>
+          </section>
+          
+          <section className="header-right">
+            <nav>
+              <Link to="/structure/linked-list" className="nav-ll">Linked list</Link>
+              <Link to="/structure/stack" className="nav-stack">Stack</Link>
+              <Link to="/structure/binary-tree" className="nav-bst">Binary search tree</Link>
+            </nav>
+          </section>
         </header>
-
-        <nav>
-          <Link to="/structure/linked-list" className="nav-ll">Linked list</Link>
-          <Link to="/structure/stack" className="nav-stack">Stack</Link>
-          <Link to="/structure/binary-tree" className="nav-bst">Binary search tree</Link>
-        </nav>
 
         <Switch>
           <Route exact path="/" component={LinkedListPath} />

@@ -139,27 +139,25 @@ export default class LinkedListPage extends Component {
 
   render() {
     return (
-      <main>
-        <section className="ds-render">
-          <div className="ds-diagram">
-            { this.dsIsEmpty()
-              ? <p className="alert-muted">List is empty; add some nodes!</p>
-              : this.renderLinkedList() }
-          </div>
+      <main className="flex-main">
+        <section className="ds-diagram">
+          { this.dsIsEmpty()
+            ? <p className="alert-muted">List is empty; add some nodes!</p>
+            : this.renderLinkedList() }
+        </section>
 
-          <div className="ds-controls">
-            <form onSubmit={(e) => this.dsInsertLast(e)}>
-              <input type="text" name="value" id="value" onKeyUp={(e) => this.setVar(e)} autoComplete="off" placeholder=">"></input>
-              <div>
-                <button type="button" onClick={this.dsInsertLast}>Insert last</button>
-                <button type="button" onClick={this.dsInsertFirst}>Insert first</button>
-                <button type="button" onClick={this.dsRemove}>Remove item</button>
-                <button type="button" onClick={this.dsClear}>Clear</button>
-              </div>
-            </form>
-            
-            <Console hover={this.highlightNode} console={this.context.console} />
-          </div>
+        <section className="ds-controls">
+          <form onSubmit={(e) => this.dsInsertLast(e)}>
+            <input type="text" name="value" id="value" onKeyUp={(e) => this.setVar(e)} autoComplete="off" placeholder=">"></input>
+            <div>
+              <button type="button" onClick={this.dsInsertLast}>Insert last</button>
+              <button type="button" onClick={this.dsInsertFirst}>Insert first</button>
+              <button type="button" onClick={this.dsRemove}>Remove item</button>
+              <button type="button" onClick={this.dsClear}>Clear</button>
+            </div>
+          </form>
+          
+          <Console hover={this.highlightNode} console={this.context.console} />
         </section>
       </main>
     );

@@ -37,7 +37,8 @@ main {
 }
 
 header {
-  flex: 4;
+  width: 100%;
+  display: flex;
 }
 
 nav {
@@ -148,10 +149,7 @@ button:hover {
   font-size: 1.1em;
 }
 
-.ds-render {
-  width: 100%;
-  min-height: 30em;
-  height: 60vh;
+.flex-main {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
