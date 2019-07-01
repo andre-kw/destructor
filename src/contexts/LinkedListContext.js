@@ -10,6 +10,7 @@ const LinkedListContext = React.createContext({
   rerender: () => {},
   log: () => {},
   logDetails: () => {},
+  highlightButton: () => {},
 });
 
 export default LinkedListContext;
@@ -31,6 +32,7 @@ export class LinkedListProvider extends Component {
       ds: [],
     }
 
+    // TODO: clean this garbage up
     this.initLinkedList = this.initLinkedList.bind(this);
     this.clearLinkedList = this.clearLinkedList.bind(this);
     this.clearConsole = this.clearConsole.bind(this);
@@ -86,6 +88,16 @@ export class LinkedListProvider extends Component {
     this.rerender();
   }
 
+  highlightButton = (id) => {
+    const btn = document.getElementById(id);
+    btn.classList.remove('btn-active');
+    btn.classList.add('btn-active');
+
+    setTimeout(() => {
+      btn.classList.remove('btn-active');
+    }, 1000);
+  }
+
   render() {
     const value = {
       ds: this.state.ds,
@@ -96,6 +108,7 @@ export class LinkedListProvider extends Component {
       rerender: this.rerender,
       log: this.log,
       logDetails: this.logDetails,
+      highlightButton: this.highlightButton,
     };
 
     return (

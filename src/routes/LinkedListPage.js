@@ -56,6 +56,7 @@ export default class LinkedListPage extends Component {
 
     if(this.state.inputValue === '') return;
 
+    this.context.highlightButton('ds-btn-insertlast');
     this.context.ds[0].insertLast(this.state.inputValue);
 
     this.context.log(
@@ -147,17 +148,17 @@ export default class LinkedListPage extends Component {
         </section>
 
         <section className="ds-controls">
+          <Console hover={this.highlightNode} console={this.context.console} />
+
           <form onSubmit={(e) => this.dsInsertLast(e)}>
-            <input type="text" name="value" id="value" onKeyUp={(e) => this.setVar(e)} autoComplete="off" placeholder=">"></input>
+            <input type="text" name="value" id="value" onKeyUp={(e) => this.setVar(e)} autoComplete="off" placeholder="> type text here"></input>
             <div>
-              <button type="button" onClick={this.dsInsertLast}>Insert last</button>
+              <button type="button" id="ds-btn-insertlast" onClick={this.dsInsertLast}>Insert last</button>
               <button type="button" onClick={this.dsInsertFirst}>Insert first</button>
               <button type="button" onClick={this.dsRemove}>Remove item</button>
               <button type="button" onClick={this.dsClear}>Clear</button>
             </div>
           </form>
-          
-          <Console hover={this.highlightNode} console={this.context.console} />
         </section>
       </main>
     );
