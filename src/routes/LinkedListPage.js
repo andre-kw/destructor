@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Console from '../components/Console';
 import LinkedListContext, { LinkedListProvider } from '../contexts/LinkedListContext';
+import AppContext from '../contexts/AppContext';
 import './LinkedListPage.css';
 
 // path for router to use
@@ -10,7 +11,7 @@ export function LinkedListPath(props) {
 
 // diagram item
 class LinkedListItem extends Component {
-  static contextType = LinkedListContext;
+  static contextType = AppContext;
 
   render() {
     let className = 'render-ll-item ';
@@ -30,100 +31,79 @@ class LinkedListItem extends Component {
 
 
 export default class LinkedListPage extends Component {
-  static contextType = LinkedListContext;
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      inputValue: '',
-    };
-  }
+  static contextType = AppContext;
 
   componentDidMount() {
-    this.context.initLinkedList();
-  }
-
-  setVar(e) {
-    if(e.target.name === 'value') {
-      this.setState({inputValue: e.target.value});
-    }
+    this.context.initDs('linked-list');
   }
 
   // data structure functions //
   dsInsertLast = (e) => {
     e.preventDefault();
 
-    if(this.state.inputValue === '') return;
+    if(this.context.input === '') return;
 
-    this.context.ds[0].insertLast(this.state.inputValue);
+    this.context.highlightButton('ds-btn-insertlast');
+    this.context.ds.insertLast(this.context.input);
 
     this.context.log(
-      `linkedList.insertLast('${this.state.inputValue}')`,
+      `linkedList.insertLast('${this.context.input}')`,
       'input',
-      this.state.inputValue);
+      this.context.input);
 
-    this.context.rerender();
+    this.context.rerenderDiagram();
     this.setState({inputValue: ''});
     document.getElementById('value').value = '';
   }
 
   dsInsertFirst = () => {
-    if(this.state.inputValue === '') return;
+    if(this.context.input === '') return;
 
-    this.context.ds[0].insertFirst(this.state.inputValue);
+    this.context.ds.insertFirst(this.context.input);
 
     this.context.log(
-      `linkedList.insertFirst('${this.state.inputValue}')`, 
+      `linkedList.insertFirst('${this.context.input}')`, 
       'input',
-      this.state.inputValue);
+      this.context.input);
 
-    this.context.rerender();
+    this.context.rerenderDiagram();
     this.setState({inputValue: ''});
     document.getElementById('value').value = '';
   }
 
   dsRemove = () => {
-    if(this.state.inputValue === '') return;
+    if(this.context.input === '') return;
 
-    let node = this.context.ds[0].remove(this.state.inputValue);
+    let node = this.context.ds.remove(this.context.input);
 
     if(! node) {
       this.context.log('node not found', 'error');
       return;
     }
 
-    this.context.log(`linkedList.remove('${this.state.inputValue}')`);
-    this.context.log(`removed node "${this.state.inputValue}"`, 'output');
+    this.context.log(`linkedList.remove('${this.context.input}')`);
+    this.context.log(`removed node "${this.context.input}"`, 'output');
 
-    this.context.rerender();
+    this.context.rerenderDiagram();
     this.setState({inputValue: ''});
     document.getElementById('value').value = '';
   }
 
   dsClear = () => {
-    this.context.clearLinkedList();
-    this.context.clearConsole();
+    this.context.clearDs();
   }
 
   dsIsEmpty = () => {
-    if(this.context.ds[0]) {
-      return this.context.ds[0].head === null;
+    if(this.context.ds) {
+      return this.context.ds.head === null;
     }
 
     return true;
   }
 
-  highlightNode = (nodeValue) => {
-    if(typeof nodeValue !== 'undefined') {
-      this.context.ds[0].toggleHighlight(nodeValue);
-      this.context.rerender();
-    }
-  }
-
   renderLinkedList() {
     let jsx = [];
-    let n = this.context.ds[0] ? this.context.ds[0].head : null;
+    let n = this.context.ds ? this.context.ds.head : null;
 
     if(! n) return null;
 
@@ -139,27 +119,27 @@ export default class LinkedListPage extends Component {
 
   render() {
     return (
-      <main>
-        <section className="ds-render">
-          <div className="ds-diagram">
-            { this.dsIsEmpty()
-              ? <p className="alert-muted">List is empty; add some nodes!</p>
-              : this.renderLinkedList() }
-          </div>
-
+      <main className="flex-main">
+        <section className="ds-info">
           <div className="ds-controls">
-            <form onSubmit={(e) => this.dsInsertLast(e)}>
-              <input type="text" name="value" id="value" onKeyUp={(e) => this.setVar(e)} autoComplete="off" placeholder=">"></input>
-              <div>
-                <button type="button" onClick={this.dsInsertLast}>Insert last</button>
-                <button type="button" onClick={this.dsInsertFirst}>Insert first</button>
-                <button type="button" onClick={this.dsRemove}>Remove item</button>
-                <button type="button" onClick={this.dsClear}>Clear</button>
-              </div>
-            </form>
-            
-            <Console hover={this.highlightNode} console={this.context.console} />
+          <Console />
+
+          <form onSubmit={(e) => this.dsInsertLast(e)}>
+            <input type="text" name="value" id="value" onKeyUp={(e) => this.context.setInput(e)} autoComplete="off" maxLength="10" placeholder="> type text here"></input>
+            <div>
+              <button type="button" id="ds-btn-insertlast" onClick={this.dsInsertLast}>Insert last</button>
+              <button type="button" onClick={this.dsInsertFirst}>Insert first</button>
+              <button type="button" onClick={this.dsRemove}>Remove item</button>
+              <button type="button" onClick={this.dsClear}>Clear</button>
+            </div>
+          </form>
           </div>
+        </section>
+
+        <section className="ds-diagram">
+          { this.dsIsEmpty()
+            ? <p className="alert-muted">List is empty; add some nodes!</p>
+            : this.renderLinkedList() }
         </section>
       </main>
     );
