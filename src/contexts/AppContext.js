@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
 import LinkedList from '../modules/LinkedList';
-import { consoleDefaults } from '../components/Console';
+import { consoleDefaults } from '../config';
 
 const AppContext = React.createContext({
   console: [],
   ds: null,
   dsType: '',
+  input: '',
   initDs: () => {},
   clearDs: () => {},
   rerenderDiagram: () => {},
   log: () => {},
   logDetails: () => {},
   highlightButton: () => {},
+  highlightNode: () => {},
+  setInput: () => {},
 });
 
 export default AppContext;
@@ -21,23 +24,19 @@ export class AppProvider extends Component {
   state = {
     console: [],
     ds: null,
-    dsType: ''
+    dsType: '',
+    input: '',
   }
 
   initDs = (dsType) => {
-    this.setState({dsType, console: consoleDefaults[dsType]});
+    let ds = null;
 
     switch(dsType) {
-      case 'linked-list':
-        const ds = new LinkedList();
-        ds.insertLast('how');
-        ds.insertLast('are');
-        ds.insertLast('you?');
-        this.setState({ds});
-        break;
-      default:
-        // do nothing
+      case 'linked-list':   ds = LinkedList.generate(); break;
+      default: // do nothing
     }
+
+    this.setState({ds, dsType, console: consoleDefaults[dsType]});
   }
 
   clearDs = () => {
@@ -94,17 +93,33 @@ export class AppProvider extends Component {
     }, 1000);
   }
 
+  highlightNode = (nodeValue) => {
+    if(typeof nodeValue !== 'undefined') {
+      this.state.ds.toggleHighlight(nodeValue);
+      this.rerenderDiagram();
+    }
+  }
+
+  setInput = (e) => {
+    if(e.target.name === 'value') {
+      this.setState({input: e.target.value});
+    }
+  }
+
   render() {
     const value = {
       console: this.state.console,
       ds: this.state.ds,
       dsType: this.state.dsType,
+      input: this.state.input,
       initDs: this.initDs,
       clearDs: this.clearDs,
       rerenderDiagram: this.rerenderDiagram,
       log: this.log,
       logDetails: this.logDetails,
       highlightButton: this.highlightButton,
+      highlightNode: this.highlightNode,
+      setInput: this.setInput,
     };
 
     return (

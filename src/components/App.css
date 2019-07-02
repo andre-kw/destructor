@@ -150,7 +150,7 @@ code {
 
 
 .ds-controls {
-  margin: 0 1em 2em;
+  margin: 0 auto 2em;
   padding: 1em;
   max-width: 25em;
   display: flex;
@@ -162,6 +162,11 @@ code {
 .ds-controls form div {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.ds-controls form button {
+  flex-basis: 6em;
 }
 
 .ds-controls input[type="text"] {
@@ -229,7 +234,9 @@ code {
     height: auto;
   }
 
-  .ds-controls { width: 90% }
+  .ds-info {
+    width: 100%;
+  }
 
   nav {
     padding: 0 0 3em;
@@ -238,13 +245,13 @@ code {
 
 @media only screen and (max-width: 455px) {
   h1 {
-    font-size: 15vw;
+    font-size: 11vw;
   }
 
   h2 {
-    font-size: 7vw;
+    font-size: 5vw;
   }
-
+  
   nav {
     padding: 1em;
   }

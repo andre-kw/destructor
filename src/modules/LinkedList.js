@@ -173,6 +173,15 @@ export default class LinkedList {
     }
   }
 
+  static generate() {
+    const ds = new LinkedList();
+    ds.insertLast('how');
+    ds.insertLast('are');
+    ds.insertLast('you?');
+
+    return ds;
+  }
+
   static printNode(node) {
     const nextNode = node.next ? node.next.value : 'null';
     const output = [];
