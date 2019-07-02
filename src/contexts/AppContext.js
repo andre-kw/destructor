@@ -101,7 +101,10 @@ export class AppProvider extends Component {
   }
 
   setInput = (e) => {
-    if(e.target.name === 'value') {
+    if(e === '') {
+      this.setState({input: ''});
+      return;
+    } else if(e.target.name === 'value') {
       this.setState({input: e.target.value});
     }
   }

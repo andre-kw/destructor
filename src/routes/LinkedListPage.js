@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Console from '../components/Console';
 import LinkedListContext, { LinkedListProvider } from '../contexts/LinkedListContext';
 import AppContext from '../contexts/AppContext';
+import { LinkedListFunctions } from '../modules/LinkedList';
 import './LinkedListPage.css';
 
 // path for router to use
@@ -56,20 +57,7 @@ export default class LinkedListPage extends Component {
     document.getElementById('value').value = '';
   }
 
-  dsInsertFirst = () => {
-    if(this.context.input === '') return;
-
-    this.context.ds.insertFirst(this.context.input);
-
-    this.context.log(
-      `linkedList.insertFirst('${this.context.input}')`, 
-      'input',
-      this.context.input);
-
-    this.context.rerenderDiagram();
-    this.setState({inputValue: ''});
-    document.getElementById('value').value = '';
-  }
+  
 
   dsRemove = () => {
     if(this.context.input === '') return;
@@ -125,10 +113,10 @@ export default class LinkedListPage extends Component {
           <Console />
 
           <form onSubmit={(e) => this.dsInsertLast(e)}>
-            <input type="text" name="value" id="value" onKeyUp={(e) => this.context.setInput(e)} autoComplete="off" maxLength="10" placeholder="> type text here"></input>
+            <input type="text" name="value" id="value" onKeyUp={(e) => this.context.setInput(e)} autoComplete="off" maxLength="20" placeholder="> type text here"></input>
             <div>
               <button type="button" id="ds-btn-insertlast" onClick={this.dsInsertLast}>Insert last</button>
-              <button type="button" onClick={this.dsInsertFirst}>Insert first</button>
+              <button type="button" onClick={() => LinkedListFunctions.insertFirst(this.context)}>Insert first</button>
               <button type="button" onClick={this.dsRemove}>Remove item</button>
               <button type="button" onClick={this.dsClear}>Clear</button>
             </div>
