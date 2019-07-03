@@ -20,6 +20,8 @@ const AppContext = React.createContext({
   validateInput: () => {},
   menuToggle: () => {},
   menuOff: () => {},
+  primeAnimation: () => {},
+  runAnimation: () => {},
 });
 
 export default AppContext;
@@ -33,6 +35,8 @@ export class AppProvider extends Component {
     dsType: '',
     input: '',
     menuVisible: false,
+    animationPrimed: false,
+    animationIndex: 0,
   }
 
   initDs = (dsType) => {
@@ -121,6 +125,7 @@ export class AppProvider extends Component {
       document.getElementById('value').value = '';
       return;
     } else if(e.target.name === 'value') {
+      // TODO: add .trim() to input
       this.setState({input: e.target.value});
     } else if(e.target.value) {
       this.setState({input: e.target.value.value}, callback);
@@ -158,6 +163,35 @@ export class AppProvider extends Component {
     }, 300);
   }
 
+  // only allow animations to run during a short period.
+  // this prevents animations from rerunning every time 
+  // the page component is updated
+  primeAnimation = (animationIndex = 0) => {
+    this.setState({animationPrimed: true, animationIndex}, () => {
+      setTimeout(() => {
+        this.setState({animationPrimed: false})
+      }, 1000);
+    });
+  }
+
+  // please don't judge this bootleg animation
+  runAnimation = (classname) => {
+    if(! this.state.animationPrimed) return;
+
+    const elements = [...document.getElementsByClassName(classname)];
+    let index = this.state.animationIndex;
+    index = index < 0 ? elements.length + index : index;
+
+    if(elements.length > 1) {
+      const el = elements[index];
+      el.classList.add(classname + '-enter');
+
+      setTimeout(() => {
+        el.classList.remove(classname + '-enter');
+      }, 1000);
+    }
+  }
+
   render() {
     const value = {
       console: this.state.console,
@@ -176,6 +210,8 @@ export class AppProvider extends Component {
       validateInput: this.validateInput,
       menuToggle: this.menuToggle,
       menuOff: this.menuOff,
+      primeAnimation: this.primeAnimation,
+      runAnimation: this.runAnimation,
     };
 
     return (

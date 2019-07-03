@@ -31,6 +31,10 @@ export default class StackPage extends Component {
     this.context.initDs('stack');
   }
 
+  componentDidUpdate() {
+    this.context.runAnimation('render-stack-item');
+  }
+
   isEmpty = () => {
     if(this.context.ds) {
       return this.context.ds.top === null;
