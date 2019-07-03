@@ -144,6 +144,7 @@ export class AppProvider extends Component {
 
     setTimeout(() => {
       this.setState({menuVisible: false});
+      document.getElementsByTagName('NAV')[0].classList.remove('nav-hiding');
     }, 150);
   }
 
