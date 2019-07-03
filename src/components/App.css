@@ -74,7 +74,7 @@ nav.nav-show {
 }
 nav.nav-hiding {
   transition: all .25s;
-  transition-delay: .1s;
+  transition-delay: .05s;
   width: 0;
   padding-left: 0;
   padding-right: 0;
@@ -113,7 +113,7 @@ nav a:hover {
 }
 
 .nav-bottom {
-  margin-top: auto
+  margin: auto 0 3em 0;
 }
 
 .nav-ll { color: #3da8f0 }
