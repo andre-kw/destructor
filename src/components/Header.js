@@ -28,6 +28,7 @@ export default class Header extends Component {
 
           <nav className={navClass} onBlur={this.context.menuOff} tabIndex="0">
             <button className="nav-close" onClick={this.context.menuOff}>x</button>
+            <hr className="named-divider" data-separator="data structures" />
             <Link to="/structure/linked-list" className="nav-ll">Linked list</Link>
             <Link to="/structure/stack" className="nav-stack">Stack</Link>
             <Link to="/structure/binary-tree" className="nav-bst">Binary search tree</Link>
