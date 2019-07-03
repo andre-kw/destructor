@@ -16,6 +16,7 @@ const AppContext = React.createContext({
   highlightButton: () => {},
   highlightNode: () => {},
   setInput: () => {},
+  validateInput: () => {},
   menuToggle: () => {},
   menuOff: () => {},
 });
@@ -88,13 +89,15 @@ export class AppProvider extends Component {
     this.setState({console: dsConsole});
   }
 
-  highlightButton = (id) => {
+  highlightButton = (id, success = true) => {
     const btn = document.getElementById(id);
-    btn.classList.remove('btn-active');
-    btn.classList.add('btn-active');
+    const classname = success ? 'btn-active' : 'btn-active-error';
+
+    btn.classList.remove('btn-active', 'btn-active-error');
+    btn.classList.add(classname);
 
     setTimeout(() => {
-      btn.classList.remove('btn-active');
+      btn.classList.remove(classname);
     }, 1000);
   }
 
@@ -108,10 +111,20 @@ export class AppProvider extends Component {
   setInput = (e) => {
     if(e === '') {
       this.setState({input: ''});
+      document.getElementById('value').value = '';
       return;
     } else if(e.target.name === 'value') {
       this.setState({input: e.target.value});
     }
+  }
+
+  validateInput = (id) => {
+    let valid = true;
+
+    if(this.state.input === '') valid = false;
+
+    this.highlightButton(id, valid);
+    return valid;
   }
 
   // this method isn't great for accessibility
@@ -143,6 +156,7 @@ export class AppProvider extends Component {
       highlightButton: this.highlightButton,
       highlightNode: this.highlightNode,
       setInput: this.setInput,
+      validateInput: this.validateInput,
       menuToggle: this.menuToggle,
       menuOff: this.menuOff,
     };

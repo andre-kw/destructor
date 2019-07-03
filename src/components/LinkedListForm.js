@@ -6,10 +6,8 @@ export default class LinkedListForm extends Component {
 
   insertLast = (e) => {
     e.preventDefault();
+    if(! this.context.validateInput('ds-btn-insertlast')) return;
 
-    if(this.context.input === '') return;
-
-    this.context.highlightButton('ds-btn-insertlast');
     this.context.ds.insertLast(this.context.input);
 
     this.context.log(
@@ -19,13 +17,11 @@ export default class LinkedListForm extends Component {
 
     this.context.rerenderDiagram();
     this.context.setInput('');
-    document.getElementById('value').value = '';
   }
 
   insertFirst = () => {
-    if(this.context.input === '') return;
+    if(! this.context.validateInput('ds-btn-insertfirst')) return;
 
-    this.context.highlightButton('ds-btn-insertfirst');
     this.context.ds.insertFirst(this.context.input);
 
     this.context.log(
@@ -35,17 +31,16 @@ export default class LinkedListForm extends Component {
 
     this.context.rerenderDiagram();
     this.context.setInput('');
-    document.getElementById('value').value = '';
   }
 
   remove = () => {
-    if(this.context.input === '') return;
+    if(! this.context.validateInput('ds-btn-remove')) return;
 
-    this.context.highlightButton('ds-btn-remove');
     let node = this.context.ds.remove(this.context.input);
 
     if(! node) {
       this.context.log('node not found', 'error');
+      this.context.setInput('');
       return;
     }
 
@@ -54,7 +49,6 @@ export default class LinkedListForm extends Component {
 
     this.context.rerenderDiagram();
     this.context.setInput('');
-    document.getElementById('value').value = '';
   }
 
   clear = () => {
