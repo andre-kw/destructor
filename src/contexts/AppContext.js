@@ -114,7 +114,13 @@ export class AppProvider extends Component {
     }
   }
 
+  // this method isn't great for accessibility
   menuToggle = () => {
+    if(! this.state.menuVisible) {
+      setTimeout(() => {
+        document.getElementsByTagName('NAV')[0].focus();
+      }, 250)
+    }
     this.setState({menuVisible: ! this.state.menuVisible});
   }
 

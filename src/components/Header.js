@@ -26,8 +26,8 @@ export default class Header extends Component {
             <button className="btn" onClick={() => this.context.menuToggle()}>Menu</button>
           </section>
 
-          <nav className={navClass}>
-            <button className="nav-close" onClick={this.context.menuToggle}>x</button>
+          <nav className={navClass} onBlur={this.context.menuOff} tabIndex="0">
+            <button className="nav-close" onClick={this.context.menuOff}>x</button>
             <Link to="/structure/linked-list" className="nav-ll">Linked list</Link>
             <Link to="/structure/stack" className="nav-stack">Stack</Link>
             <Link to="/structure/binary-tree" className="nav-bst">Binary search tree</Link>

@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Anonymous+Pro|Cormorant+SC');
 
 html {
-  height: 100vh;
+  min-height: 100%;
   /*border-left: 2vw solid transparent;
   border-right: 2vw solid transparent;
   border-color: #d4bd89;
@@ -61,7 +61,8 @@ nav {
   z-index: 9;
   background-color: #fbfbfb;
   box-shadow: -10px 0px 18px #00000008;
-  overflow: auto;
+  overflow: hidden;
+  outline: none;
 }
 
 nav.nav-show {
@@ -139,20 +140,20 @@ button {
 }
 
 button:hover {
-  background-color: #606060;
+  background-color: #c0c0c0;
 }
 
 .btn-active {
-  background-color: #fff;
-  color: black;
+  background-color: #c0c0c0;
+  color: #fff;
   animation-name: click;
   animation-duration: 1s;
 }
 
 @keyframes click {
   0% {
-    background-color: #fff;
-    color: black;
+    background-color: #c0c0c0;
+    color: #fff;
   }
 
   100% {
@@ -272,6 +273,18 @@ code > p {
   flex-basis: 30em;
   justify-content: center;
   align-content: baseline;
+  animation-name: diagram-flash;
+  animation-duration: 1s;
+}
+
+@keyframes diagram-flash {
+  0% {
+    background-color: rgba(0,0,0, 0.25);
+  }
+
+  100% {
+    background-color: transparent;
+  }
 }
 
 .ds-console {
@@ -287,7 +300,7 @@ code > p {
 
 .line-comment { color: #859b98; }
 .line-input { color: #616161; cursor: pointer }
-.line-input:hover { color: yellow; font-style: italic }
+.line-input:hover { color: #998118; font-style: italic }
 .line-output,
 .line-output-italic { color: #009013; }
 
