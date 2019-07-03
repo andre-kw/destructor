@@ -17,7 +17,7 @@ class LinkedListItem extends Component {
     } else {
       className += 'render-null';
     }
-  
+
     return (
       <div className={className} onClick={() => this.context.logDetails(this.props.node)}>{text}</div>
     );
@@ -32,6 +32,10 @@ export default class LinkedListPage extends Component {
     this.context.initDs('linked-list');
   }
 
+  componentDidUpdate() {
+    this.context.runAnimation('render-ll-item');
+  }
+
   isEmpty = () => {
     if(this.context.ds) {
       return this.context.ds.head === null;
@@ -40,7 +44,7 @@ export default class LinkedListPage extends Component {
     return true;
   }
 
-  renderLinkedList() {
+  renderLinkedList = () => {
     let jsx = [];
     let n = this.context.ds ? this.context.ds.head : null;
 

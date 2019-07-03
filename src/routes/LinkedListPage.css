@@ -6,10 +6,19 @@
   background-color: #10bdff;
   color: #fff;
   cursor: pointer;
-  word-break: break-all;
+  /* word-break: break-all; */
   font-size: 1.25em;
   align-self: flex-start;
   border-right: 10px solid white;
+}
+.render-ll-item-enter {
+  animation-name: add-ll;
+  animation-duration: 2s;
+}
+
+@keyframes add-ll {
+  0% { max-width: 0; }
+  100% { max-width: 10em; }
 }
 
 .render-ll-item:after {

@@ -9,6 +9,7 @@ export default class LinkedListForm extends Component {
     this.context.setInput(e, () => {
       if(! this.context.validateInput('ds-btn-insertlast')) return;
 
+      this.context.primeAnimation(-2);
       this.context.ds.insertLast(this.context.input);
   
       this.context.log(
@@ -25,6 +26,7 @@ export default class LinkedListForm extends Component {
   insertFirst = () => {
     if(! this.context.validateInput('ds-btn-insertfirst')) return;
 
+    this.context.primeAnimation(0);
     this.context.ds.insertFirst(this.context.input);
 
     this.context.log(

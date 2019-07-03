@@ -9,6 +9,7 @@ export default class StackForm extends Component {
     this.context.setInput(e, () => {
       if(! this.context.validateInput('ds-btn-push')) return;
 
+      this.context.primeAnimation(0);
       this.context.ds.push(this.context.input);
   
       this.context.log(
@@ -27,6 +28,7 @@ export default class StackForm extends Component {
       return;
     };
 
+    this.context.primeAnimation(0);
     this.context.ds.pop();
     this.context.log(`stack.pop()`, 'input');
 
