@@ -144,7 +144,7 @@ export class AppProvider extends Component {
     nav.classList.add('nav-hiding');
 
     setTimeout(() => {
-      nav.classList.remove('nav-hiding');
+      nav.removeAttribute('class');
       this.setState({menuVisible: false});
     }, 150);
   }
