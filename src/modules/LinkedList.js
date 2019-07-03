@@ -194,20 +194,3 @@ export default class LinkedList {
     return output;
   }
 }
-
-export const LinkedListFunctions = {
-  insertFirst(context) {
-    if(context.input === '') return;
-
-    context.ds.insertFirst(context.input);
-
-    context.log(
-      `linkedList.insertFirst('${context.input}')`, 
-      'input',
-      context.input);
-
-    context.rerenderDiagram();
-    context.setInput('');
-    document.getElementById('value').value = '';
-  }
-}

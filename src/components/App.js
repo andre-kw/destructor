@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
 import { AppProvider } from '../contexts/AppContext';
-import { LinkedListPath } from '../routes/LinkedListPage';
+import LinkedListPage from '../routes/LinkedListPage';
 import { BinaryTreePath } from '../routes/BinaryTreePage';
 import { StackPath } from '../routes/StackPage';
 import './App.css';
@@ -33,8 +33,8 @@ class App extends Component {
 
       <AppProvider>
         <Switch>
-          <Route exact path="/" component={LinkedListPath} />
-          <Route exact path="/structure/linked-list" component={LinkedListPath} />
+          <Route exact path="/" component={LinkedListPage} />
+          <Route exact path="/structure/linked-list" component={LinkedListPage} />
           <Route exact path="/structure/stack" component={StackPath} />
           <Route exact path="/structure/binary-tree" component={BinaryTreePath} />
         </Switch>
