@@ -6,7 +6,7 @@ html {
   border-right: 2vw solid transparent;
   border-color: #d4bd89;
   background-color: #f30660;*/
-  background-color: #212121;
+  background-color: #efefef;
 }
 
 html:before, html:after {
@@ -15,10 +15,10 @@ html:before, html:after {
   /*background: #d4bd89;*/
   background: repeating-linear-gradient(
     45deg,
-    #d4bd89,
-    #d4bd89 20px,
-    #202020 20px,
-    #202020 40px
+    #f5c55b,
+    #f5c55b 20px,
+    #efefef 20px,
+    #efefef 40px
   );
   left: 0; right: 0;
   height: .75em;
@@ -59,8 +59,9 @@ nav {
   display: none;
   flex-direction: column;
   z-index: 9;
-  background-color: #fff;
-  box-shadow: -10px 0px 18px #00000069;
+  background-color: #fbfbfb;
+  box-shadow: -10px 0px 18px #00000008;
+  overflow: auto;
 }
 
 nav.nav-show {
@@ -84,6 +85,7 @@ nav.nav-show {
 
 nav a,
 nav a:visited {
+  min-width: 10em;
   font-size: 1em;
   text-decoration: none;
   display: inline-block;
@@ -111,7 +113,7 @@ h1 {
   margin: 0;
   font-family: 'Cormorant SC';
   font-size: 4em;
-  color: #ffcf63;
+  color: #eab641;
   font-weight: normal;
   line-height: 1em;
 }
@@ -121,7 +123,7 @@ h2 {
   font-variant: all-small-caps;
   font-size: 1.5em;
   letter-spacing: 5px;
-  color: #ffcf63;
+  color: #eab641;
 }
 
 button {
@@ -129,7 +131,7 @@ button {
   padding: 10px 12px;
   border: 0;
   border-radius: 5px;
-  background: #404040;
+  background: #a7a7a7;
   color: #fff;
   font-family: inherit;
   font-size: 0.75em;
@@ -164,6 +166,10 @@ button:hover {
 .btn-function {
   margin-top: 1em;
   border-radius: 20px;
+  outline: none;
+}
+.btn-function:focus {
+  text-decoration: underline;
 }
 
 code {
@@ -203,7 +209,8 @@ code {
   width: 80%;
   display: flex;
   flex-direction: column;
-  background-color: #2d2d2d;
+  background-color: #dedede;
+  border-radius: 10px;
 }
 
 
@@ -219,7 +226,7 @@ code {
 
 .ds-controls input[type="text"] {
   padding: 8px;
-  margin: 0 0 1em 0;
+  margin: 0 0 10px 0;
   width: 100%;
   font-family: courier;
   font-weight: bold;
@@ -228,6 +235,12 @@ code {
   border: 0;
   border-bottom: 1px solid #717171;
   box-sizing: border-box;
+  outline: none;
+}
+.ds-controls input[type="text"]:focus {
+  margin: 0 0 8px 0;
+  border-color: #44b6eb;
+  border-bottom-width: 3px;
 }
 
 .ds-diagram {
@@ -252,7 +265,7 @@ code {
 
 
 .line-comment { color: #616161; }
-.line-input { color: #dedede; cursor: pointer }
+.line-input { color: #6d8481; cursor: pointer }
 .line-input:hover { color: yellow; font-style: italic }
 .line-output,
 .line-output-italic { color: #009013; }
