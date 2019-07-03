@@ -39,7 +39,7 @@ main {
 header {
   margin: .5em auto 1em;
   width: 100%;
-  max-width: 90em;
+  max-width: 60em;
   display: flex;
 }
 
@@ -175,8 +175,17 @@ code {
   margin: 0 auto;
 }
 
-.header-left {
+.header-left,
+.header-right {
   padding: 1.25em 1.75em;
+}
+
+.header-right {
+  padding-left: 0;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .flex-main {
