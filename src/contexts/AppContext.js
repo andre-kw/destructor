@@ -132,7 +132,7 @@ export class AppProvider extends Component {
     if(! this.state.menuVisible) {
       setTimeout(() => {
         document.getElementsByTagName('NAV')[0].focus();
-      }, 450);
+      }, 400);
     }
     this.setState({menuVisible: ! this.state.menuVisible});
   }
@@ -144,7 +144,7 @@ export class AppProvider extends Component {
     nav.classList.add('nav-hiding');
 
     setTimeout(() => {
-      nav.removeAttribute('class');
+      nav.classList.remove('nav-hiding');
       this.setState({menuVisible: false});
     }, 150);
   }

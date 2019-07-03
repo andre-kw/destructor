@@ -74,7 +74,7 @@ nav.nav-show {
 }
 nav.nav-hiding {
   transition: all .25s;
-  transition-delay: .05s;
+  transition-delay: .1s;
   width: 0;
   padding-left: 0;
   padding-right: 0;
