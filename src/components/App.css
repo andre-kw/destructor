@@ -172,6 +172,7 @@ button:hover {
   font-weight: 100;
   text-shadow: 0px 1px 1px #c5c5c5;
   transition: all .15s;
+  flex-grow: 1;
 }
 .btn-function:hover,
 .btn-function:focus {
