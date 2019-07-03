@@ -140,11 +140,12 @@ export class AppProvider extends Component {
   // timeout is necessary because links won't work 
   // if nav disappears immediately
   menuOff = () => {
-    document.getElementsByTagName('NAV')[0].classList.add('nav-hiding');
+    const nav = document.getElementsByTagName('NAV')[0];
+    nav.classList.add('nav-hiding');
 
     setTimeout(() => {
+      nav.classList.remove('nav-hiding');
       this.setState({menuVisible: false});
-      document.getElementsByTagName('NAV')[0].classList.remove('nav-hiding');
     }, 150);
   }
 
