@@ -44,7 +44,7 @@ export default class Console extends Component {
 
     return (
       <div className="ds-console">
-        <pre><code>{this.renderConsole()}</code></pre>
+        <code>{this.renderConsole()}</code>
       </div>
     );
   }
