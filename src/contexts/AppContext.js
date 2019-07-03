@@ -132,7 +132,7 @@ export class AppProvider extends Component {
     if(! this.state.menuVisible) {
       setTimeout(() => {
         document.getElementsByTagName('NAV')[0].focus();
-      }, 50);
+      }, 450);
     }
     this.setState({menuVisible: ! this.state.menuVisible});
   }
