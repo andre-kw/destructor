@@ -51,8 +51,8 @@ footer {
 
 nav {
   width: 0;
-  height: 100%;
-  padding: 1em;
+  height: 90vh;
+  padding: 5vh;
   position: absolute;
   top: 0;
   right: 0;
@@ -63,6 +63,7 @@ nav {
   box-shadow: -10px 0px 18px #00000008;
   overflow: hidden;
   outline: none;
+  transition: all .15s;
 }
 
 nav.nav-show {
@@ -70,6 +71,13 @@ nav.nav-show {
   display: flex;
   animation-name: show-nav;
   animation-duration: .35s;
+}
+nav.nav-hiding {
+  transition: all .25s;
+  transition-delay: .1s;
+  width: 0;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 @keyframes show-nav {
@@ -102,6 +110,10 @@ nav a:hover {
   padding: .4em;
   background-color: #eaeaea;
   color: gray;
+}
+
+.nav-bottom {
+  margin-top: auto
 }
 
 .nav-ll { color: #3da8f0 }
@@ -340,7 +352,7 @@ code > p {
   z-index: 5;
 }
 .named-divider:after {
-  width: 9em;
+  width: 9.5em;
   margin: 0 auto;
   display: block;
   content: attr(data-separator);
@@ -380,10 +392,6 @@ code > p {
 
   h2 {
     font-size: 5vw;
-  }
-  
-  nav {
-    padding: 1em;
   }
 }
 

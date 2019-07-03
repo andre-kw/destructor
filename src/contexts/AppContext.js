@@ -132,13 +132,19 @@ export class AppProvider extends Component {
     if(! this.state.menuVisible) {
       setTimeout(() => {
         document.getElementsByTagName('NAV')[0].focus();
-      }, 250)
+      }, 250);
     }
     this.setState({menuVisible: ! this.state.menuVisible});
   }
 
+  // timeout is necessary because links won't work 
+  // if nav disappears immediately
   menuOff = () => {
-    this.setState({menuVisible: false});
+    document.getElementsByTagName('NAV')[0].classList.add('nav-hiding');
+
+    setTimeout(() => {
+      this.setState({menuVisible: false});
+    }, 250);
   }
 
   render() {
