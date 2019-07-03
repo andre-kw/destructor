@@ -6,7 +6,7 @@ export default class LinkedListForm extends Component {
 
   insertLast = (e) => {
     e.preventDefault();
-    
+
     if(this.context.input === '') return;
 
     this.context.highlightButton('ds-btn-insertlast');
@@ -59,15 +59,19 @@ export default class LinkedListForm extends Component {
     this.context.clearDs();
   }
 
+  scroll = () => {
+    window.scrollTo(0, 260)
+  }
+
   render() {
     return (
       <form onSubmit={(e) => this.insertLast(e)}>
-        <input type="text" name="value" id="value" onKeyUp={(e) => this.context.setInput(e)} autoComplete="off" maxLength="20" placeholder="> type text here"></input>
+        <input type="text" name="value" id="value" onFocus={this.scroll} onKeyUp={(e) => this.context.setInput(e)} autoComplete="off" maxLength="20" placeholder="> type text here"></input>
         <div>
-          <button type="button" id="ds-btn-insertlast" onClick={this.insertLast}>Insert last</button>
-          <button type="button" onClick={this.insertFirst}>Insert first</button>
-          <button type="button" onClick={this.remove}>Remove item</button>
-          <button type="button" onClick={this.clear}>Clear</button>
+          <button type="button" className="btn btn-function" id="ds-btn-insertlast" onClick={this.insertLast}>Insert last</button>
+          <button type="button" className="btn btn-function" onClick={this.insertFirst}>Insert first</button>
+          <button type="button" className="btn btn-function" onClick={this.remove}>Remove item</button>
+          <button type="button" className="btn btn-function" onClick={this.clear}>Clear</button>
         </div>
       </form>
     );

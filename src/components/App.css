@@ -128,6 +128,11 @@ button:hover {
   }
 }
 
+.btn-function {
+  margin-top: 1em;
+  border-radius: 20px;
+}
+
 code {
   font-size: 0.85em;
 }
@@ -153,6 +158,7 @@ code {
   margin: 0 auto 2em;
   padding: 1em;
   max-width: 25em;
+  width: 80%;
   display: flex;
   flex-direction: column;
   background-color: #2d2d2d;
@@ -161,7 +167,7 @@ code {
 
 .ds-controls form div {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-wrap: wrap;
 }
 
@@ -227,6 +233,10 @@ code {
 @media only screen and (max-width: 850px) {
   #root-container {
     flex-direction: column;
+  }
+
+  .btn-function {
+    font-size: 0.65em;
   }
 
   .ds-render {
