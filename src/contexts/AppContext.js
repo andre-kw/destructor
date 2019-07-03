@@ -7,6 +7,7 @@ const AppContext = React.createContext({
   ds: null,
   dsType: '',
   input: '',
+  menuVisible: false,
   initDs: () => {},
   clearDs: () => {},
   rerenderDiagram: () => {},
@@ -15,9 +16,12 @@ const AppContext = React.createContext({
   highlightButton: () => {},
   highlightNode: () => {},
   setInput: () => {},
+  menuToggle: () => {},
+  menuOff: () => {},
 });
 
 export default AppContext;
+
 
 
 export class AppProvider extends Component {
@@ -26,6 +30,7 @@ export class AppProvider extends Component {
     ds: null,
     dsType: '',
     input: '',
+    menuVisible: false,
   }
 
   initDs = (dsType) => {
@@ -109,12 +114,21 @@ export class AppProvider extends Component {
     }
   }
 
+  menuToggle = () => {
+    this.setState({menuVisible: ! this.state.menuVisible});
+  }
+
+  menuOff = () => {
+    this.setState({menuVisible: false});
+  }
+
   render() {
     const value = {
       console: this.state.console,
       ds: this.state.ds,
       dsType: this.state.dsType,
       input: this.state.input,
+      menuVisible: this.state.menuVisible,
       initDs: this.initDs,
       clearDs: this.clearDs,
       rerenderDiagram: this.rerenderDiagram,
@@ -123,6 +137,8 @@ export class AppProvider extends Component {
       highlightButton: this.highlightButton,
       highlightNode: this.highlightNode,
       setInput: this.setInput,
+      menuToggle: this.menuToggle,
+      menuOff: this.menuOff,
     };
 
     return (

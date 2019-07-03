@@ -63,7 +63,6 @@ export default class LinkedList {
 
   insertAfter(item, key) {
     let newNode = new _LinkedListNode(item, null);
-    let prevNode = this.head;
     let currNode = this.head;
 
     if(this.head === null) {
@@ -71,7 +70,6 @@ export default class LinkedList {
     }
 
     while(currNode.value !== key) {
-      prevNode = currNode;
       currNode = currNode.next;
     }
 

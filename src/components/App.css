@@ -50,10 +50,36 @@ footer {
 }
 
 nav {
-  padding: 3em 0;
-  color: #707070;
-  flex: 3;
-  text-align: right;
+  width: 0;
+  height: 100%;
+  padding: 1em;
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: none;
+  flex-direction: column;
+  z-index: 9;
+  background-color: #fff;
+  box-shadow: -10px 0px 18px #00000069;
+}
+
+nav.nav-show {
+  width: 10em;
+  display: flex;
+  animation-name: show-nav;
+  animation-duration: .5s;
+}
+
+@keyframes show-nav {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+
+  100% {
+    width: 10em;
+    opacity: 1;
+  }
 }
 
 nav a,
@@ -61,13 +87,20 @@ nav a:visited {
   font-size: 1em;
   text-decoration: none;
   display: inline-block;
-  padding: 4px 10px;
-  background-color: #2d2d2d;
+  padding: .5em;
 }
 
 nav a:hover {
   text-decoration: underline;
-  background-color: #505050;
+  background-color: #e6e6e6;
+}
+
+.nav-close {
+  width: 3em;
+  margin: 0 0 1em;
+  padding: .4em;
+  background-color: #eaeaea;
+  color: gray;
 }
 
 .nav-ll { color: #3da8f0 }
@@ -246,10 +279,6 @@ code {
 
   .ds-info {
     width: 100%;
-  }
-
-  nav {
-    padding: 0 0 3em;
   }
 }
 
