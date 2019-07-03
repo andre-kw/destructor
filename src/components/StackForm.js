@@ -6,17 +6,19 @@ export default class StackForm extends Component {
 
   push = (e) => {
     e.preventDefault();
-    if(! this.context.validateInput('ds-btn-push')) return;
+    this.context.setInput(e, () => {
+      if(! this.context.validateInput('ds-btn-push')) return;
 
-    this.context.ds.push(this.context.input);
-
-    this.context.log(
-      `stack.push('${this.context.input}')`,
-      'input',
-      this.context.input);
-
-    this.context.rerenderDiagram();
-    this.context.setInput('');
+      this.context.ds.push(this.context.input);
+  
+      this.context.log(
+        `stack.push('${this.context.input}')`,
+        'input',
+        this.context.input);
+  
+      this.context.rerenderDiagram();
+      this.context.setInput('');
+    });
   }
 
   pop = () => {
@@ -46,7 +48,7 @@ export default class StackForm extends Component {
   render() {
     return (
       <form onSubmit={(e) => this.push(e)}>
-        <input type="text" name="value" id="value" onFocus={this.scroll} onKeyUp={(e) => this.context.setInput(e)} autoComplete="off" maxLength="20" placeholder="> type text here"></input>
+        <input type="text" name="value" id="value" onFocus={this.scroll} onBlur={(e) => this.context.setInput(e)} autoComplete="off" maxLength="20" placeholder="> type text here"></input>
         <div>
           <button type="button" className="btn btn-function" id="ds-btn-push" onClick={this.push}>Push</button>
           <button type="button" className="btn btn-function" id="ds-btn-pop"  onClick={this.pop}>Pop</button>

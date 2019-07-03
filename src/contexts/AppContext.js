@@ -112,13 +112,18 @@ export class AppProvider extends Component {
     }
   }
 
-  setInput = (e) => {
+  // valid parameters are: empty string (to clear input),
+  // listener event directly on input element,
+  // or listener event on form
+  setInput = (e, callback = () => {}) => {
     if(e === '') {
       this.setState({input: ''});
       document.getElementById('value').value = '';
       return;
     } else if(e.target.name === 'value') {
       this.setState({input: e.target.value});
+    } else if(e.target.value) {
+      this.setState({input: e.target.value.value}, callback);
     }
   }
 
@@ -150,7 +155,7 @@ export class AppProvider extends Component {
     setTimeout(() => {
       nav.classList.remove('nav-hiding');
       this.setState({menuVisible: false});
-    }, 150);
+    }, 300);
   }
 
   render() {
