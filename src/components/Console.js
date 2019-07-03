@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import AppContext from '../contexts/AppContext';
-import { consoleDefaults } from '../config';
 
 class ConsoleLine extends Component {
   static contextType = AppContext;

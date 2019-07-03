@@ -38,7 +38,7 @@ export default class Header extends Component {
 
             <div className="nav-bottom">
               <hr className="named-divider" data-separator="other" />
-              <a href="http://github.com/andre-kw/destructor" target="_blank" alt="github">Github</a>
+              <a href="http://github.com/andre-kw/destructor" target="_blank" rel="noopener noreferrer" alt="github">Github</a>
             </div>
           </nav>
         </header>
