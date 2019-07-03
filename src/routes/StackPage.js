@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
+import AppContext from '../contexts/AppContext';
+import StackForm from '../components/StackForm';
 import Console from '../components/Console';
-import StackContext, { StackProvider } from '../contexts/StackContext';
 import './StackPage.css';
 
-export function StackPath(props) {
-  return <StackProvider><StackPage /></StackProvider>;
-}
-
 class StackItem extends Component {
-  static contextType = StackContext;
+  static contextType = AppContext;
 
   render() {
     let className = 'render-stack-item ';
@@ -28,51 +25,15 @@ class StackItem extends Component {
 
 
 export default class StackPage extends Component {
-  static contextType = StackContext;
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      inputValue: '',
-    };
-  }
+  static contextType = AppContext;
 
   componentDidMount() {
-    this.context.initStack();
-  }
-  
-  setVar = (e) => {
-    if(e.target.name === 'value') {
-      this.setState({inputValue: e.target.value});
-    }
+    this.context.initDs('stack');
   }
 
-  resetInput = () => {
-    this.setState({inputValue: ''});
-    document.getElementById('value').value = '';
-  }
-
-  // data structure functions //
-  dsPush = (e) => {
-    e.preventDefault();
-    this.context.stackPush(this.state.inputValue);
-    this.resetInput();
-  }
-
-  dsPop = () => {
-    this.context.stackPop();
-    this.resetInput();
-  }
-
-  dsClear = () => {
-    this.context.clearStack();
-    this.context.clearConsole();
-  }
-
-  dsIsEmpty = () => {
-    if(this.context.ds[0]) {
-      return this.context.ds[0].top === null;
+  isEmpty = () => {
+    if(this.context.ds) {
+      return this.context.ds.top === null;
     }
 
     return true;
@@ -80,49 +41,39 @@ export default class StackPage extends Component {
 
   highlightNode = (nodeValue) => {
     if(typeof nodeValue !== 'undefined') {
-      this.context.ds[0].toggleHighlight(nodeValue);
-      this.context.rerender();
+      this.context.ds.toggleHighlight(nodeValue);
+      this.context.rerenderDiagram();
     }
   }
 
   renderStack = () => {
     let jsx = [];
-    let n = this.context.ds[0] ? this.context.ds[0].top : null;
+    let n = this.context.ds ? this.context.ds.top : null;
 
     if(! n) return null;
 
     while(n) {
       jsx.push(<StackItem key={Math.random()} node={n} />);
       n = n.next;
-    } 
-
-    //jsx.push(<StackItem key='null-item' />);
+    }
 
     return jsx;
   }
 
   render() {
     return (
-      <main>
-        <section className="ds-render">
-          <div className="ds-diagram ds-stack-diagram">
-            { this.dsIsEmpty()
-              ? <p className="alert-muted">Stack is empty; add some nodes!</p>
-              : this.renderStack() }
-          </div>
-
+      <main className="flex-main">
+        <section className="ds-info">
           <div className="ds-controls">
-            <form onSubmit={this.dsPush}>
-              <input type="text" name="value" id="value" onKeyUp={(e) => this.setVar(e)} autoComplete="off" placeholder=">"></input>
-              <div>
-                <button type="button" onClick={this.dsPush}>Push</button>
-                <button type="button" onClick={this.dsPop}>Pop</button>
-                <button type="button" onClick={this.dsClear}>Clear</button>
-              </div>
-            </form>
-            
-            <Console hover={this.highlightNode} console={this.context.console} />
+            <Console />
+            <StackForm />
           </div>
+        </section>
+
+        <section className="ds-diagram ds-stack-diagram">
+          { this.isEmpty()
+            ? <p className="alert-muted">Stack is empty; add some nodes!</p>
+            : this.renderStack() }
         </section>
       </main>
     );

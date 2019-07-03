@@ -35,4 +35,24 @@ export default class Stack {
       currNode = currNode.next;
     }
   }
+
+  static generate() {
+    const ds = new Stack();
+    ds.push('first in');
+    ds.push('last out');
+
+    return ds;
+  }
+
+  static printNode(node) {
+    /*const nextNode = node.next ? node.next.value : 'null';
+    const output = [];
+
+    output.push({text:`node: {`, type:'output-italic'});
+    output.push({text:`   value: "${node.value}"`, type:'output-italic'});
+    output.push({text:`   next: "${nextNode}"`, type:'output-italic'});
+    output.push({text:`}`, type:'output-italic'});
+
+    return output;*/
+  }
 }

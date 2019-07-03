@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import LinkedList from '../modules/LinkedList';
+import Stack from '../modules/Stack';
 import { consoleDefaults } from '../config';
 
 const AppContext = React.createContext({
@@ -39,10 +40,12 @@ export class AppProvider extends Component {
 
     switch(dsType) {
       case 'linked-list':   ds = LinkedList.generate(); break;
+      case 'stack':   ds = Stack.generate(); break;
       default: // do nothing
     }
 
-    this.setState({ds, dsType, console: consoleDefaults[dsType]});
+    // implicitly clone consoleDefaults array
+    this.setState({ds, dsType, console: consoleDefaults[dsType].slice(0)});
   }
 
   clearDs = () => {
@@ -51,6 +54,7 @@ export class AppProvider extends Component {
 
     switch(this.state.dsType) {
       case 'linked-list':   ds = new LinkedList(); break;
+      case 'stack':   ds = new Stack(); break;
       default:
         // do nothing
     }

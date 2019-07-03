@@ -3,7 +3,7 @@ import { Switch, Route, Link, withRouter } from 'react-router-dom';
 import AppContext from '../contexts/AppContext';
 import LinkedListPage from '../routes/LinkedListPage';
 import { BinaryTreePath } from '../routes/BinaryTreePage';
-import { StackPath } from '../routes/StackPage';
+import StackPage from '../routes/StackPage';
 import Header from '../components/Header';
 import './App.css';
 
@@ -17,7 +17,6 @@ class App extends Component {
   }
 
   render() {
-
     return (
       <>
         <Header />
@@ -25,7 +24,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={LinkedListPage} />
           <Route exact path="/structure/linked-list" component={LinkedListPage} />
-          <Route exact path="/structure/stack" component={StackPath} />
+          <Route exact path="/structure/stack" component={StackPage} />
           <Route exact path="/structure/binary-tree" component={BinaryTreePath} />
         </Switch>
 

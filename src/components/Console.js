@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import AppContext from '../contexts/AppContext';
+import { consoleDefaults } from '../config';
 
 class ConsoleLine extends Component {
   static contextType = AppContext;
@@ -35,7 +36,7 @@ export default class Console extends Component {
     this.context.console.forEach((line, index) => {
       jsx.push(<ConsoleLine type={line.type} nodeValue={line.nodeValue} key={index}>{line.text}</ConsoleLine>);
     });
-
+    
     return jsx;
   }
 

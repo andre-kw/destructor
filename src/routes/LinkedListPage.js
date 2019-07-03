@@ -61,8 +61,8 @@ export default class LinkedListPage extends Component {
       <main className="flex-main">
         <section className="ds-info">
           <div className="ds-controls">
-          <Console />
-          <LinkedListForm />
+            <Console />
+            <LinkedListForm />
           </div>
         </section>
 
