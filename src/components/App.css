@@ -137,7 +137,19 @@ h2 {
   color: #eab641;
 }
 
-button {
+h3 {
+  text-decoration: underline;
+  text-decoration-color: #d3d3d3;
+}
+
+.header-logo:link,
+.header-logo:visited {
+  text-decoration: none;
+  color: initial;
+}
+
+button,
+.btn {
   margin: 0 0.5em;
   padding: 10px 12px;
   border: 0;
@@ -151,7 +163,8 @@ button {
   line-height: 1.25em;
 }
 
-button:hover {
+button:hover,
+.btn:hover {
   background-color: #c0c0c0;
 }
 
@@ -197,6 +210,16 @@ button:hover {
 }
 .btn-function:focus {
   text-decoration: underline;
+}
+
+.btn-index {
+  width: 10em;
+  margin: 3em auto;
+  padding: 1em;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  background-color: #1fddef;
 }
 
 code {
@@ -275,11 +298,22 @@ code > p {
   text-shadow: 0px 1px 0px #8e8e8e;
   box-sizing: border-box;
   outline: none;
+  transition: all .15s;
 }
 .ds-controls input[type="text"]:focus {
   margin: 0 0 8px 0;
   border-color: #44b6eb;
   border-bottom-width: 3px;
+}
+
+.input-error {
+  border-color: red !important;
+  animation-name: error-fade;
+  animation-duration: 1s;
+}
+@keyframes error-fade {
+  0% { border-color: red; }
+  100% { border-color: #44b6eb; }
 }
 
 .ds-diagram {
@@ -290,18 +324,7 @@ code > p {
   flex-basis: 30em;
   justify-content: center;
   align-content: baseline;
-  /*animation-name: diagram-flash;
-  animation-duration: 1s;*/
-}
-
-@keyframes diagram-flash {
-  0% {
-    background-color: rgba(0,0,0, 0.25);
-  }
-
-  100% {
-    background-color: transparent;
-  }
+  text-align: center;
 }
 
 .ds-console {
@@ -364,7 +387,22 @@ code > p {
   background-color: #fbfbfb;
 }
 
+.index-summary {
+  max-width: 25em;
+  margin: 0 auto;
+  padding: 0 2em;
+  font-size: 1.5em;
+  line-height: 1.5em;
+  color: #404040;
+}
 
+
+
+@media only screen and (min-width: 1441px) {
+  header {
+    margin-top: 5vw;
+  }
+}
 
 @media only screen and (max-width: 850px) {
   #root-container {
@@ -392,6 +430,10 @@ code > p {
 
   h2 {
     font-size: 5vw;
+  }
+
+  .index-summary {
+    font-size: 1.25em;
   }
 }
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route, withRouter } from 'react-router-dom';
 import AppContext from '../contexts/AppContext';
+import IndexPage from '../routes/IndexPage';
 import LinkedListPage from '../routes/LinkedListPage';
 import StackPage from '../routes/StackPage';
 import Header from '../components/Header';
@@ -16,21 +17,19 @@ class App extends Component {
   }
 
   render() {
-    return (
-      <>
-        <Header />
+    return <>
+      <Header />
 
-        <Switch>
-          <Route exact path="/" component={LinkedListPage} />
-          <Route exact path="/structure/linked-list" component={LinkedListPage} />
-          <Route exact path="/structure/stack" component={StackPage} />
-        </Switch>
+      <Switch>
+        <Route exact path="/" component={IndexPage} />
+        <Route exact path="/structure/linked-list" component={LinkedListPage} />
+        <Route exact path="/structure/stack" component={StackPage} />
+      </Switch>
 
-        <footer>
-          <p>© 2019 Andre Willie.</p>
-        </footer>
-      </>
-    );
+      <footer>
+        <p>© 2019 Andre Willie.</p>
+      </footer>
+    </>;
   }
 }
 

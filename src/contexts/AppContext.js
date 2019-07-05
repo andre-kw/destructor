@@ -99,14 +99,21 @@ export class AppProvider extends Component {
 
   highlightButton = (id, success = true) => {
     const btn = document.getElementById(id);
+    const txt = document.getElementById('value');
     const classname = success ? 'btn-active' : 'btn-active-error';
+
+    if(! success) {
+      txt.focus();
+      txt.classList.add('input-error');
+    }
 
     btn.classList.remove('btn-active', 'btn-active-error');
     btn.classList.add(classname);
 
     setTimeout(() => {
       btn.classList.remove(classname);
-    }, 1000);
+      txt.classList.remove('input-error');
+    }, 500);
   }
 
   highlightNode = (nodeValue) => {
