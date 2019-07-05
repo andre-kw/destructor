@@ -183,6 +183,7 @@ button:hover,
 
 @keyframes click {
   0% {
+    background-color: gray;
     color: #fff;
   }
 
@@ -260,8 +261,15 @@ code > p {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  animation-name: fade-down;
+  animation-duration: 1s;
 }
 
+
+.ds-info {
+  max-width: 40em;
+  flex-basis: 25em;
+}
 
 .ds-controls {
   margin: 0 auto 2em;
@@ -394,6 +402,12 @@ code > p {
   font-size: 1.5em;
   line-height: 1.5em;
   color: #404040;
+  animation-name: fade-down;
+  animation-duration: 1s;
+}
+@keyframes fade-down {
+  0% { opacity: 0; transform: translateY(-20px) }
+  100% { opacity: 1; transform: translateY(0px) }
 }
 
 
