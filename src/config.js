@@ -1,7 +1,8 @@
+const firstLine = {text:'// try hovering the console lines!', type:'comment'}
+
 export const consoleDefaults = {
   'singly-linked-list': [
-    {text:'/* you can hover these console lines. try it! */', type:'comment'},
-    {text:'/* create a singly linked list */', type:'comment'},
+    firstLine,
     {text:'let LinkedList = new LinkedList();', type:'input'},
     {text:'[LinkedList]', type:'output'},
     {text:'LinkedList.insertLast("how");', type:'input', nodeValue:'how'},
@@ -9,8 +10,7 @@ export const consoleDefaults = {
     {text:'LinkedList.insertLast("you?");', type:'input', nodeValue:'you?'},
   ],
   'stack': [
-    {text:'/* you can hover these console lines. try it! */', type:'comment'},
-    {text:'/* create a stack */', type:'comment'},
+    firstLine,
     {text:'let stack = new Stack();', type:'input'},
     {text:'[Stack]', type:'output'},
     {text:'stack.push("first in");', type:'input', nodeValue:'first in'},

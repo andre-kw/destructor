@@ -72,6 +72,6 @@ export default class SinglyLinkedListForm extends Component {
   }
 
   render() {
-    return <Form type="singly-linked-list" functions={this.functions} submit={this.submit} />;
+    return <Form functions={this.functions} submit={this.submit} />;
   }
 }
