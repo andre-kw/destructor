@@ -26,7 +26,7 @@
   position: absolute;
   content: "\21D2";
   bottom: 6px;
-  left: 102%;
+  right: -30px;
   font-size: 2em;
   color: #fff;
 }
