@@ -18,7 +18,7 @@ export default class IndexPage extends Component {
           structure; an input field is provided to let you input data and visualize 
           its position in the data structure.</p>
 
-          <Link to="/structure/linked-list" className="btn btn-index"
+          <Link to="/example/linked-list" className="btn btn-index"
             onClick={() => window.scrollTo(0,0)}>Get started</Link>
         </section>
       </main>

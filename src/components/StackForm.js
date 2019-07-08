@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AppContext from '../contexts/AppContext';
+import Form from './Form';
 
 export default class StackForm extends Component {
   static contextType = AppContext;
@@ -41,22 +42,15 @@ export default class StackForm extends Component {
     this.context.clearDs();
   }
 
-  scroll = () => {
-    if(document.body.scrollWidth <= 768) {
-      window.scrollTo(0, 260);
-    }
+  submit = this.push
+
+  functions = {
+    'Push': this.push,
+    'Pop': this.pop,
+    'Clear': this.clear
   }
 
   render() {
-    return (
-      <form onSubmit={(e) => this.push(e)}>
-        <input type="text" name="value" id="value" onFocus={this.scroll} onBlur={(e) => this.context.setInput(e)} autoComplete="off" maxLength="20" placeholder="> type text here"></input>
-        <div>
-          <button type="button" className="btn btn-function" id="ds-btn-push" onClick={this.push}>Push</button>
-          <button type="button" className="btn btn-function" id="ds-btn-pop"  onClick={this.pop}>Pop</button>
-          <button type="button" className="btn btn-function" id="ds-btn-clear"  onClick={this.clear}>Clear</button>
-        </div>
-      </form>
-    );
+    return <Form type="linked-list" functions={this.functions} submit={this.submit} />;
   }
 }

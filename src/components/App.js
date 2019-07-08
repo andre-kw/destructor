@@ -22,8 +22,8 @@ class App extends Component {
 
       <Switch>
         <Route exact path="/" component={IndexPage} />
-        <Route exact path="/structure/linked-list" component={LinkedListPage} />
-        <Route exact path="/structure/stack" component={StackPage} />
+        <Route exact path="/example/linked-list" component={LinkedListPage} />
+        <Route exact path="/example/stack" component={StackPage} />
       </Switch>
 
       <footer>

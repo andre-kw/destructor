@@ -14,9 +14,9 @@ export default class Header extends Component {
           <Link to="/" className="header-logo"><h1>destructor.</h1></Link>
           <h2>
             <Switch>
-              <Route exact path="/structure/linked-list" render={() => 'Linked list'} />
-              <Route exact path="/structure/stack" render={() => 'Stack'} />
-              <Route exact path="/structure/binary-tree" render={() => 'Binary tree'} />
+              <Route exact path="/example/linked-list" render={() => 'Linked list'} />
+              <Route exact path="/example/stack" render={() => 'Stack'} />
+              <Route exact path="/example/binary-tree" render={() => 'Binary tree'} />
             </Switch>
           </h2>
         </section>
@@ -30,9 +30,9 @@ export default class Header extends Component {
 
           <div className="nav-top">
             <hr className="named-divider" data-separator="data structures" />
-            <Link to="/structure/linked-list" className="nav-ll">Linked list</Link>
-            <Link to="/structure/stack" className="nav-stack">Stack</Link>
-            <Link to="/structure/binary-tree" className="nav-bst">Binary search tree</Link>
+            <Link to="/example/linked-list" className="nav-ll">Linked list</Link>
+            <Link to="/example/stack" className="nav-stack">Stack</Link>
+            <Link to="/example/binary-tree" className="nav-bst">Binary search tree</Link>
           </div>
 
           <div className="nav-bottom">

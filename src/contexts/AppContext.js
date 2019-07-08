@@ -191,10 +191,10 @@ export class AppProvider extends Component {
 
     if(elements.length > 1) {
       const el = elements[index];
-      el.classList.add(classname + '-enter');
+      el.classList.add(`${classname}-enter`);
 
       setTimeout(() => {
-        el.classList.remove(classname + '-enter');
+        el.classList.remove(`${classname}-enter`);
       }, 1000);
     }
   }

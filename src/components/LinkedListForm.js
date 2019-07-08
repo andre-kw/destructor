@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AppContext from '../contexts/AppContext';
+import Form from './Form';
 
 export default class LinkedListForm extends Component {
   static contextType = AppContext;
@@ -7,7 +8,7 @@ export default class LinkedListForm extends Component {
   insertLast = (e) => {
     e.preventDefault();
     this.context.setInput(e, () => {
-      if(! this.context.validateInput('ds-btn-insertlast')) return;
+      if(! this.context.validateInput('ds-btn-insert-last')) return;
 
       this.context.primeAnimation(-2);
       this.context.ds.insertLast(this.context.input);
@@ -24,7 +25,7 @@ export default class LinkedListForm extends Component {
   }
 
   insertFirst = () => {
-    if(! this.context.validateInput('ds-btn-insertfirst')) return;
+    if(! this.context.validateInput('ds-btn-insert-first')) return;
 
     this.context.primeAnimation(0);
     this.context.ds.insertFirst(this.context.input);
@@ -39,7 +40,7 @@ export default class LinkedListForm extends Component {
   }
 
   remove = () => {
-    if(! this.context.validateInput('ds-btn-remove')) return;
+    if(! this.context.validateInput('ds-btn-remove-item')) return;
 
     let node = this.context.ds.remove(this.context.input);
 
@@ -61,23 +62,16 @@ export default class LinkedListForm extends Component {
     this.context.clearDs();
   }
 
-  scroll = () => {
-    if(document.body.scrollWidth <= 768) {
-      window.scrollTo(0, 260);
-    }
+  submit = this.insertLast
+
+  functions = {
+    'Insert last': this.insertLast,
+    'Insert first': this.insertFirst,
+    'Remove item': this.remove,
+    'Clear': this.clear
   }
 
   render() {
-    return (
-      <form onSubmit={this.insertLast}>
-        <input type="text" name="value" id="value" onFocus={this.scroll} onBlur={(e) => this.context.setInput(e)} autoComplete="off" maxLength="20" placeholder="> type text here"></input>
-        <div>
-          <button type="button" className="btn btn-function" id="ds-btn-insertlast" onClick={this.insertLast}>Insert last</button>
-          <button type="button" className="btn btn-function" id="ds-btn-insertfirst" onClick={this.insertFirst}>Insert first</button>
-          <button type="button" className="btn btn-function" id="ds-btn-remove" onClick={this.remove}>Remove item</button>
-          <button type="button" className="btn btn-function" id="ds-btn-clear" onClick={this.clear}>Clear</button>
-        </div>
-      </form>
-    );
+    return <Form type="linked-list" functions={this.functions} submit={this.submit} />;
   }
 }
