@@ -5,12 +5,13 @@ export default class Form extends Component {
   static contextType = AppContext;
 
   getClassname = (str) => {
-    return str.split(' ').join('-').toLowerCase();
+    return 'ds-btn-' + str.split(' ').join('-').toLowerCase();
   }
 
   renderBtns = () => {
     return Object.entries(this.props.functions).map(arr => {
-      return <button type="button" className="btn btn-function" id={`ds-btn-${this.getClassname(arr[0])}`} onClick={arr[1]}>{arr[0]}</button>
+      const classname = this.getClassname(arr[0])
+      return <button type="button" className="btn btn-function" id={classname} key={classname} onClick={arr[1]}>{arr[0]}</button>
     });
   }
 
@@ -18,7 +19,7 @@ export default class Form extends Component {
     return (
       <form onSubmit={this.props.submit}>
         <input type="text" name="value" id="value" onBlur={(e) => this.context.setInput(e)} autoComplete="off" maxLength="20" placeholder="> type text here"></input>
-        
+
         <div>{this.renderBtns()}</div>
       </form>
     );

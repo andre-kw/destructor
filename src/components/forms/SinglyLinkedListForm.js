@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import AppContext from '../contexts/AppContext';
-import Form from './Form';
+import AppContext from '../../contexts/AppContext';
+import Form from '../Form';
 
 export default class SinglyLinkedListForm extends Component {
   static contextType = AppContext;

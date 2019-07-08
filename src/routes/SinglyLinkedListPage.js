@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import AppContext from '../contexts/AppContext';
 import Console from '../components/Console';
-import SinglyLinkedListForm from '../components/SinglyLinkedListForm';
+import SinglyLinkedListForm from '../components/forms/SinglyLinkedListForm';
 import './SinglyLinkedListPage.css';
 
 // an individual diagram item
@@ -44,6 +44,8 @@ export default class SinglyLinkedListPage extends Component {
     return true;
   }
 
+  // message to the future: if diagrams start getting more complex,
+  // make it into a component
   renderSinglyLinkedList = () => {
     let jsx = [];
     let n = this.context.ds ? this.context.ds.head : null;

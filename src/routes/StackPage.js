@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import AppContext from '../contexts/AppContext';
-import StackForm from '../components/StackForm';
+import StackForm from '../components/forms/StackForm';
 import Console from '../components/Console';
 import './StackPage.css';
 
@@ -50,6 +50,8 @@ export default class StackPage extends Component {
     }
   }
 
+  // message to the future: if diagrams start getting more complex,
+  // make it into a component
   renderStack = () => {
     let jsx = [];
     let n = this.context.ds ? this.context.ds.top : null;
