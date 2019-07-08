@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import AppContext from '../contexts/AppContext';
 import Form from './Form';
 
-export default class LinkedListForm extends Component {
+export default class SinglyLinkedListForm extends Component {
   static contextType = AppContext;
 
   insertLast = (e) => {
@@ -14,7 +14,7 @@ export default class LinkedListForm extends Component {
       this.context.ds.insertLast(this.context.input);
   
       this.context.log(
-        `linkedList.insertLast('${this.context.input}')`,
+        `LinkedList.insertLast('${this.context.input}')`,
         'input',
         this.context.input);
   
@@ -31,7 +31,7 @@ export default class LinkedListForm extends Component {
     this.context.ds.insertFirst(this.context.input);
 
     this.context.log(
-      `linkedList.insertFirst('${this.context.input}')`, 
+      `LinkedList.insertFirst('${this.context.input}')`, 
       'input',
       this.context.input);
 
@@ -50,7 +50,7 @@ export default class LinkedListForm extends Component {
       return;
     }
 
-    this.context.log(`linkedList.remove('${this.context.input}')`);
+    this.context.log(`LinkedList.remove('${this.context.input}')`);
     this.context.log(`removed node "${this.context.input}"`, 'output');
 
     this.context.rerenderDiagram();
@@ -72,6 +72,6 @@ export default class LinkedListForm extends Component {
   }
 
   render() {
-    return <Form type="linked-list" functions={this.functions} submit={this.submit} />;
+    return <Form type="singly-linked-list" functions={this.functions} submit={this.submit} />;
   }
 }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route, withRouter } from 'react-router-dom';
 import AppContext from '../contexts/AppContext';
 import IndexPage from '../routes/IndexPage';
-import LinkedListPage from '../routes/LinkedListPage';
+import SinglyLinkedListPage from '../routes/SinglyLinkedListPage';
 import StackPage from '../routes/StackPage';
 import Header from '../components/Header';
 import './App.css';
@@ -22,7 +22,7 @@ class App extends Component {
 
       <Switch>
         <Route exact path="/" component={IndexPage} />
-        <Route exact path="/example/linked-list" component={LinkedListPage} />
+        <Route exact path="/example/singly-linked-list" component={SinglyLinkedListPage} />
         <Route exact path="/example/stack" component={StackPage} />
       </Switch>
 

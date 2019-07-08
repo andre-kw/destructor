@@ -51,6 +51,6 @@ export default class StackForm extends Component {
   }
 
   render() {
-    return <Form type="linked-list" functions={this.functions} submit={this.submit} />;
+    return <Form type="singly-linked-list" functions={this.functions} submit={this.submit} />;
   }
 }

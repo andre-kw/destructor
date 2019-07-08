@@ -1,4 +1,4 @@
-class _LinkedListNode {
+class _SinglyLinkedListNode {
   constructor(value, next, id = 0) {
     this.id = id;
     this.value = value;
@@ -7,7 +7,7 @@ class _LinkedListNode {
   }
 }
 
-export default class LinkedList {
+export default class SinglyLinkedList {
   constructor(head = null) {
     this.head = head;
   }
@@ -21,7 +21,7 @@ export default class LinkedList {
       }
     }
     
-    this.head = new _LinkedListNode(item, this.head);
+    this.head = new _SinglyLinkedListNode(item, this.head);
   }
 
   // TODO: when theres only one node, adding puts the wrong id
@@ -35,12 +35,12 @@ export default class LinkedList {
         currNode = currNode.next;
       }
 
-      currNode.next = new _LinkedListNode(item, null);
+      currNode.next = new _SinglyLinkedListNode(item, null);
     }
   }
 
   insertBefore(item, key) {
-    let newNode = new _LinkedListNode(item, null);
+    let newNode = new _SinglyLinkedListNode(item, null);
     let prevNode = this.head;
     let currNode = this.head;
 
@@ -62,7 +62,7 @@ export default class LinkedList {
   }
 
   insertAfter(item, key) {
-    let newNode = new _LinkedListNode(item, null);
+    let newNode = new _SinglyLinkedListNode(item, null);
     let currNode = this.head;
 
     if(this.head === null) {
@@ -82,7 +82,7 @@ export default class LinkedList {
   }
 
   insertAt(item, pos) {
-    let newNode = new _LinkedListNode(item, null);
+    let newNode = new _SinglyLinkedListNode(item, null);
     let prevNode = this.head;
     let currNode = this.head;
     let currNodePos = 0;
@@ -172,7 +172,7 @@ export default class LinkedList {
   }
 
   static generate() {
-    const ds = new LinkedList();
+    const ds = new SinglyLinkedList();
     ds.insertLast('how');
     ds.insertLast('are');
     ds.insertLast('you?');

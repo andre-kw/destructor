@@ -63,7 +63,7 @@ export default class BinaryTreePage extends Component {
     this.context.ds[0].insertLast(this.state.inputValue);
 
     this.context.log(
-      `linkedList.insertLast('${this.state.inputValue}')`,
+      `SinglyLinkedList.insertLast('${this.state.inputValue}')`,
       'input',
       this.state.inputValue);
 

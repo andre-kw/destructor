@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import LinkedList from '../modules/LinkedList';
+import SinglyLinkedList from '../modules/SinglyLinkedList';
 import Stack from '../modules/Stack';
 import { consoleDefaults } from '../config';
 
@@ -43,7 +43,7 @@ export class AppProvider extends Component {
     let ds = null;
 
     switch(dsType) {
-      case 'linked-list':   ds = LinkedList.generate(); break;
+      case 'singly-linked-list':   ds = SinglyLinkedList.generate(); break;
       case 'stack':   ds = Stack.generate(); break;
       default: // do nothing
     }
@@ -57,7 +57,7 @@ export class AppProvider extends Component {
     let ds = null;
 
     switch(this.state.dsType) {
-      case 'linked-list':   ds = new LinkedList(); break;
+      case 'singly-linked-list':   ds = new SinglyLinkedList(); break;
       case 'stack':   ds = new Stack(); break;
       default:
         // do nothing
@@ -89,7 +89,7 @@ export class AppProvider extends Component {
     }
 
     switch(this.state.dsType) {
-      case 'linked-list':   output = LinkedList.printNode(node); break;
+      case 'singly-linked-list':   output = SinglyLinkedList.printNode(node); break;
       default: // do nothing
     }
 
