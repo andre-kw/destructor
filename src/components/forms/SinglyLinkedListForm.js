@@ -6,8 +6,8 @@ export default class SinglyLinkedListForm extends Component {
   static contextType = AppContext;
 
   insertLast = (e) => {
-    e.preventDefault();
     this.context.setInput(e, () => {
+      Form.focusInput();
       if(! this.context.validateInput('ds-btn-insert-last')) return;
 
       this.context.primeAnimation(-2);
@@ -25,6 +25,7 @@ export default class SinglyLinkedListForm extends Component {
   }
 
   insertFirst = () => {
+    Form.focusInput();
     if(! this.context.validateInput('ds-btn-insert-first')) return;
 
     this.context.primeAnimation(0);
@@ -40,6 +41,7 @@ export default class SinglyLinkedListForm extends Component {
   }
 
   remove = () => {
+    Form.focusInput();
     if(! this.context.validateInput('ds-btn-remove-item')) return;
 
     let node = this.context.ds.remove(this.context.input);
@@ -58,6 +60,7 @@ export default class SinglyLinkedListForm extends Component {
   }
 
   clear = () => {
+    Form.focusInput();
     this.context.highlightButton('ds-btn-clear');
     this.context.clearDs();
   }

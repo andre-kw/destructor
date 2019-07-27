@@ -4,6 +4,10 @@ import AppContext from '../contexts/AppContext';
 export default class Form extends Component {
   static contextType = AppContext;
 
+  static focusInput = () => {
+    document.getElementById('value').focus();
+  }
+
   getClassname = (str) => {
     return 'ds-btn-' + str.split(' ').join('-').toLowerCase();
   }
@@ -15,10 +19,15 @@ export default class Form extends Component {
     });
   }
 
+  onSubmit = (e) => {
+    e.preventDefault();
+    this.props.submit(e);
+  }
+
   render() {
     return (
-      <form onSubmit={this.props.submit}>
-        <input type="text" name="value" id="value" onBlur={(e) => this.context.setInput(e)} autoComplete="off" maxLength="20" placeholder="> type text here"></input>
+      <form onSubmit={this.onSubmit}>
+        <input type="text" name="value" id="value" ref="value" onBlur={(e) => this.context.setInput(e)} autoComplete="off" maxLength="20" placeholder="> type text here"></input>
 
         <div>{this.renderBtns()}</div>
       </form>

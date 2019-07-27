@@ -6,8 +6,8 @@ export default class StackForm extends Component {
   static contextType = AppContext;
 
   push = (e) => {
-    e.preventDefault();
     this.context.setInput(e, () => {
+      Form.focusInput();
       if(! this.context.validateInput('ds-btn-push')) return;
 
       this.context.primeAnimation(0);
@@ -24,6 +24,7 @@ export default class StackForm extends Component {
   }
 
   pop = () => {
+    Form.focusInput();
     if(this.context.ds.top === null) {
       this.context.highlightButton('ds-btn-pop', false);
       return;
@@ -38,6 +39,7 @@ export default class StackForm extends Component {
   }
 
   clear = () => {
+    Form.focusInput();
     this.context.highlightButton('ds-btn-clear');
     this.context.clearDs();
   }
